@@ -45,7 +45,7 @@ const SignIn = () => {
       );
       const user = userCredentials.user;
       console.log("successfully signed in", user);
-      navigate("/games");
+      navigate("/movie-list");
       setSignInFormData({
         email: "",
         password: "",

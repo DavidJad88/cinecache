@@ -1,12 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "../Navbar/Navbar.module.css";
 import Button from "../Button/Button";
 import { useState } from "react";
+import { getAuthContext } from "../../context/authContext";
+import { auth } from "../../../firebaseConfig";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
-  const [isSignedin, setIsSignedin] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  // context
+  const { user } = getAuthContext();
+
+  const navigate = useNavigate();
 
   //dynamic searcbar
   const handleSearchbarVisible = () => {
@@ -23,6 +30,16 @@ const Navbar = () => {
   const handleInputChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+      console.log("user was successfully signed out");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -57,12 +74,14 @@ const Navbar = () => {
               />
             )}
           </div>
-          {isSignedin ? (
+          {user ? (
             <div className={styles.userTools}>
               <div className={styles.userIcon}>
                 <img src="/assets/icons/user.svg" alt="user profile icon" />
               </div>
-              <Button className={styles.signOutButton}>Sign Out</Button>
+              <Button className={styles.signOutButton} onClick={handleSignOut}>
+                Sign Out
+              </Button>
             </div>
           ) : (
             <div className={styles.signInContainer}>
@@ -93,7 +112,7 @@ const Navbar = () => {
           >
             Contact Us
           </NavLink>
-          {isSignedin && <NavLink to={"/profile"}>My Cache</NavLink>}
+          {user && <NavLink to={"/profile"}>My Cache</NavLink>}
         </div>
       </div>
     </nav>

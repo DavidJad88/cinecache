@@ -6,7 +6,12 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background-color: var(--primary-color);
+  background: #262828;
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 76%
+  );
   padding: var(--space-x-large);
 }
 

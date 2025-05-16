@@ -1,0 +1,91 @@
+.formWrapper {
+  width: 100%;
+  min-height: 100vh;
+  max-height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("/images/hero-section.jpg");
+  padding: var(--space-x-large);
+  color: var(--primary-color);
+}
+.signUpForm {
+  width: 50%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+  padding: var(--space-large);
+  background-color: var(--primary-color-light);
+  border-radius: var(--border-radius-medium);
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  padding: var(--space-medium);
+  border-radius: var(--border-radius-medium);
+}
+.formGroupTitle {
+  font-weight: bold;
+}
+.formInput {
+  width: 100%;
+  height: 32px;
+  padding: 0 var(--space-small);
+}
+.createAccountButton {
+  height: 48px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border-radius: var(--border-radius-small);
+  border: none;
+  transition: all 0.3s ease-in-out;
+  font-size: var(--base-font-size);
+}
+.createAccountButton:hover {
+  background-color: var(--secondary-color);
+}
+.errorMessage {
+  color: var(--text-error);
+}
+
+.imagePreviewContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.imagePreview {
+  width: 150px; /* Ensures the image stays small */
+  height: 150px; /* Maintains proportional scaling */
+  object-fit: cover; /* Prevents distortion and keeps scaling proportional */
+  border-radius: 50%; /* Adds rounding to the image for aesthetics */
+  overflow: hidden; /* Prevent image from spilling outside */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeImageButton {
+  margin-top: 8px;
+  background-color: #ff4d4d; /* Red for emphasis */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px; /* Compact padding */
+  font-size: 14px; /* Standard button text size */
+  cursor: pointer; /* Indicates clickable action */
+}
+
+.removeImageButton:hover {
+  background-color: #e60000; /* Slightly darker red for hover effect */
+}

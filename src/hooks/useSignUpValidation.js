@@ -10,13 +10,21 @@ export const useSignUpValidation = () => {
     if (!values.firstname.trim()) {
       newErrors.firstname = "First name is required";
     }
+
     if (!values.lastname.trim()) {
       newErrors.lastname = "Last name is required";
     }
+
     if (!values.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!emailRegex.test(values.email.trim())) {
       newErrors.email = "Please Enter a valid email address";
+    }
+
+    if (!values.userName.trim()) {
+      newErrors.userName = "Username is required";
+    } else if (values.userName.trim().lenght < 5) {
+      newErrors.userName = "Username must be minimum 5 characters";
     }
 
     if (!values.password.trim()) {

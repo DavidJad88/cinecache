@@ -5,11 +5,7 @@
   background: #355e85;
   background: #262828;
   background: #262828;
-  background: linear-gradient(
-    180deg,
-    rgba(38, 40, 40, 1) 0%,
-    rgba(87, 87, 87, 1) 68%
-  );
+  background: linear-gradient(180deg, rgba(38, 40, 40, 1) 0%, #575757 68%);
 
   display: flex;
   flex-direction: column;

@@ -1,0 +1,89 @@
+.formWrapper {
+  width: 100%;
+  min-height: 100vh;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: var(--space-x-large);
+}
+
+.formWrapper h2 {
+  color: var(--text-light);
+  font-size: var(--medium-font-size);
+}
+
+.signInForm {
+  width: 50%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+  padding: var(--space-large);
+  background-color: var(--primary-color-light);
+  border-radius: var(--border-radius-medium);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  padding: var(--space-medium);
+  border-radius: var(--border-radius-medium);
+}
+.formGroupTitle {
+  font-weight: bold;
+}
+.formInput {
+  width: 100%;
+  height: 32px;
+  padding: 0 var(--space-small);
+}
+.signInButton {
+  height: 48px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border-radius: var(--border-radius-small);
+  border: none;
+  transition: all 0.3s ease-in-out;
+  font-size: var(--base-font-size);
+}
+.signInButton:hover {
+  background-color: var(--secondary-color);
+}
+.errorMessage {
+  color: var(--text-error);
+}
+.forgotPasswordButton {
+  background-color: transparent;
+  border: none;
+  font-size: var(--base-font-size);
+  text-decoration: underline;
+  color: inherit;
+}
+.resetFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+  color: var(--primary-color);
+}
+.resetFormContainer p {
+  line-height: 1.5;
+}
+.resetInput {
+  height: 32px;
+  padding: 0 var(--space-small);
+}
+.resetButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-medium);
+}
+.resetPasswordButton,
+.closeButton {
+  flex: 1;
+  height: 32px;
+  color: var(--primary-color);
+}

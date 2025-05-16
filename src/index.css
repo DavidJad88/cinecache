@@ -9,6 +9,10 @@ button {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
+
 @font-face {
   font-family: Zain-Regular;
   src: url("/assets/fonts/Zain-Regular.ttf");
@@ -24,7 +28,7 @@ button {
 }
 
 :root {
-  --primary-color: #3c0d60;
+  --primary-color: ##575757;
   --secondary-color: #642f6c;
   --primary-color-light: #fff;
   --secondary-color-light: lavender;

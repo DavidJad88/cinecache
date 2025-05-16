@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Zain-Regular;
+}
+
+button {
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: Zain-Regular;
+  src: url("/assets/fonts/Zain-Regular.ttf");
+}
+
+@font-face {
+  font-family: Zain-Light;
+  src: url("/assets/fonts/Zain-Light.ttf");
+}
+@font-face {
+  font-family: Zain-Italic;
+  src: url("/assets/fonts/Zain-Italic.ttf");
+}
+
+:root {
+  --primary-color: #3c0d60;
+  --secondary-color: #642f6c;
+  --primary-color-light: #fff;
+  --secondary-color-light: lavender;
+  --card-color: #a7bcd6;
+  --text-light: #ffffff;
+  --text-error: crimson;
+
+  /* Fonts */
+  --base-font-size: 1rem;
+  --medium-font-size: 1.5rem;
+  --large-font-size: 2rem;
+  --x-large-font-size: 3rem;
+  --xx-large-font-size: 4rem;
+
+  /* Spacing */
+  --space-small: 0.5rem;
+  --space-medium: 1rem;
+  --space-large: 2rem;
+  --space-x-large: 4rem;
+
+  /* Border Radius */
+  --border-radius-small: 0.25rem;
+  --border-radius-medium: 0.5rem;
+  --border-radius-large: 1rem;
+}

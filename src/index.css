@@ -29,6 +29,7 @@ a {
 
 :root {
   --primary-color: #575757;
+  --primary-color-accent: #484848;
   --secondary-color: #642f6c;
   --primary-color-light: #fff;
   --secondary-color-light: lavender;
@@ -36,12 +37,17 @@ a {
   --text-light: #ffffff;
   --text-error: crimson;
 
+  --button-color-cta: #d3a937;
+  --button-color-cta-hover: #d3a9379d;
+
   /* Fonts */
   --base-font-size: 1rem;
   --medium-font-size: 1.5rem;
   --large-font-size: 2rem;
   --x-large-font-size: 3rem;
   --xx-large-font-size: 4rem;
+  --font-zain-italic: "Zain-Italic", Arial, sans-serif;
+  --font-zain-light: "Zain-Light";
 
   /* Spacing */
   --space-small: 0.5rem;

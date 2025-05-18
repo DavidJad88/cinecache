@@ -1,0 +1,150 @@
+.homepageWrapper {
+  width: 100%;
+  min-height: 100vh;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background: #262828;
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 76%
+  );
+  padding: var(--space-x-large);
+  gap: var(--space-medium);
+}
+/* ------------------------------------------------ */
+.heroSection {
+  width: 100%;
+  height: auto;
+  max-width: 1200px;
+  height: 600px;
+  display: flex;
+
+  background-image: url("/assets/images/movie-theater.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius-large);
+}
+/* ......... */
+.heroDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 50%;
+}
+
+.heroDescriptionWrapper div {
+  display: flex;
+  width: 100%;
+  flex-basis: 33%;
+  padding-left: var(--space-large);
+  padding-top: var(--space-large);
+  align-content: flex-start;
+  backdrop-filter: grayscale(50%);
+}
+
+.heroMainTitleWrapper h2 {
+  font-size: var(--xx-large-font-size);
+  color: var(--text-light);
+  text-shadow: 4px black;
+}
+.heroBlurbWrapper p {
+  color: var(--text-light);
+  font-size: var(--large-font-size);
+  font-family: var(--font-zain-italic);
+}
+
+.heroCtaButton {
+  width: 250px;
+  height: 50px;
+  border-radius: var(--border-radius-medium);
+  font-size: var(--medium-font-size);
+
+  background-color: var(--button-color-cta);
+  transition: background-color 0.5s;
+}
+
+.heroCtaButton:hover {
+  background-color: var(--button-color-cta-hover);
+}
+
+/* ......... */
+
+.heroImageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  width: 50%;
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  backdrop-filter: grayscale(50%);
+}
+.heroImageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--border-radius-medium);
+}
+
+/* ------------------------------------------------ */
+.featuresSection {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 250px;
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 33%;
+  gap: var(--space-medium);
+}
+.featureCard {
+  width: 20%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-light);
+  background-color: var(--primary-color-accent);
+  transition: background-color 0.5s;
+  border-radius: var(--border-radius-medium);
+}
+
+.featureCard:hover {
+  background-color: var(--primary-color);
+}
+
+.featureCardIconWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+.featureCardIconWrapper img {
+  width: 30%;
+}
+
+.featureCardDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  padding: 0 var(--space-medium);
+  text-align: center;
+}
+
+/* ------------------------------------------------ */
+.latestReleasesSection {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 500px;
+  display: flex;
+  flex-basis: 33%;
+  background-color: var(--secondary-color);
+}

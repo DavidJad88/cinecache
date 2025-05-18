@@ -1,4 +1,4 @@
-import styles from "../SignUp/SignUp.module.css";
+import styles from "./SignUp.module.css";
 
 import Button from "../../components/Button/Button";
 import { useState, useRef } from "react";

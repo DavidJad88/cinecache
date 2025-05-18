@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import styles from "../Navbar/Navbar.module.css";
+import styles from "./Navbar.module.css";
 import Button from "../Button/Button";
 import { useState } from "react";
 import { getAuthContext } from "../../context/authContext";

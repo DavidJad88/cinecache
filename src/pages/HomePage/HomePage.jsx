@@ -1,4 +1,4 @@
-import styles from "../HomePage/HomePage.module.css";
+import styles from "./HomePage.module.css";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 

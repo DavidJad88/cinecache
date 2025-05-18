@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../SignIn/SignIn.module.css";
+import styles from "./SignIn.module.css";
 import useSignInValidation from "../../hooks/useSignInValidation";
 import {
   sendPasswordResetEmail,

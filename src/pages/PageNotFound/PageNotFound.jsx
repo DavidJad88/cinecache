@@ -1,4 +1,4 @@
-import styles from "../PageNotFound/PageNotFound.module.css";
+import styles from "./PageNotFound.module.css";
 
 const PageNotFound = () => {
   return <div>PageNotFound</div>;

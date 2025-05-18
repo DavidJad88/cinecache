@@ -1,4 +1,4 @@
-import styles from "../VerifyEmail/VerifyEmail.module.css";
+import styles from "./VerifyEmail.module.css";
 
 const VerifyEmail = () => {
   return <div>VerifyEmail</div>;

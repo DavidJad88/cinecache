@@ -1,0 +1,22 @@
+.scrollerWrapper {
+  width: 100%;
+  max-width: 1200px;
+  height: 370px;
+  display: flex;
+  overflow-x: scroll;
+  gap: var(--space-medium);
+  scrollbar-color: var(--primary-color-accent);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color-accent);
+  border-radius: var(--border-radius-medium);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light);
+}

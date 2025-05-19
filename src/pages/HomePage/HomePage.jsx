@@ -1,6 +1,8 @@
 import styles from "./HomePage.module.css";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import MovieScroller from "../../components/MovieScroller/MovieScroller";
 
 const HomePage = () => {
   return (
@@ -62,7 +64,8 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className={styles.latestReleasesSection}>goodbye</div>
+      <h1>Browse the latest titles</h1>
+      <MovieScroller queryParam={28}></MovieScroller>
     </div>
   );
 };

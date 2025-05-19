@@ -1,7 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import "./App.module.css";
+
+//components
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <>
@@ -11,6 +14,7 @@ function App() {
       <main>
         <Outlet />
       </main>
+      <Footer></Footer>
     </>
   );
 }

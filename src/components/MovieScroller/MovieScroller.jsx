@@ -4,7 +4,6 @@ import MovieCard from "../MovieCard/MovieCard";
 
 const MovieScroller = ({ queryParam }) => {
   const { fetchedFilms, errors, isLoading } = useFetchFilms(queryParam);
-  console.log(fetchedFilms);
 
   if (isLoading) return <div>Loading movies...</div>;
   if (errors) return <div>Error: {errors}</div>;

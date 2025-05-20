@@ -1,0 +1,28 @@
+.movieListWrapper {
+  width: 100%;
+  min-height: 100vh;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background: #262828;
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 76%
+  );
+  padding: var(--space-x-large);
+  gap: var(--space-large);
+}
+
+.genreWrapper {
+  border-top: 2px dotted var(--primary-color-accent);
+  border-bottom: 2px dotted var(--primary-color-accent);
+  padding: var(--space-medium) 0;
+}
+
+.genreHeader {
+  font-size: var(--large-font-size);
+  color: var(--text-light);
+}

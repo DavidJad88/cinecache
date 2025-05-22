@@ -141,7 +141,7 @@ const MovieDetails = () => {
                 </div>
                 <div>
                   <p className={styles.detailHeading}>Directed by</p>{" "}
-                  {directorObj.map((director) => {
+                  {directorObj?.map((director) => {
                     return <p key={director.id}>{director.name}</p>;
                   })}
                 </div>

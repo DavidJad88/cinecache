@@ -40,6 +40,9 @@ a {
   --button-color-cta: #d3a937;
   --button-color-cta-hover: #d3a9379d;
 
+  --star-active: #d3a937;
+  --star-inactive: #afafaf;
+
   /* Fonts */
   --base-font-size: 1rem;
   --medium-font-size: 1.5rem;

@@ -1,23 +1,45 @@
 import styles from "./MovieDetails.module.css";
-import { useParams } from "react-router-dom";
-
-import { useEffect, useState } from "react";
+import Modal from "../../components/Modal/Modal";
+import AddToLibrary from "../../components/AddToLibrary/AddToLibrary";
 import Button from "../../components/Button/Button";
+import StarRater from "../../components/StarRater/StarRater";
+
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { database } from "../../../firebaseConfig";
+import { getAuthContext } from "../../context/authContext";
 
 import { countryCodes, countryLanguages } from "../../data/countryCode";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const MovieDetails = () => {
+  //api fetching and render params states
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [movieCrew, setMovieCrew] = useState(null);
+
+  const { user } = getAuthContext();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  //states for adding and removing to library
+  const [showAddToLibraryModal, setShowAddToLibraryModal] = useState(false);
+  const [showRemoveFromLibraryModal, setShowRemoveFromLibraryModal] =
+    useState(false);
+
+  const [usersRating, setUsersRating] = useState(null);
+
+  // const [showAddToWatchListModal, setShowAddToWatchListModal] = useState(false);
+  // const [showRemoveFromWatchList, setShowRemoveFromWatchListModal] =
+  //   useState(false);
+
   // states for checks if movie is in users library
   const [isInUserLibrary, setisInUserLibrary] = useState(false);
-  const [isInUserWatchList, setIsInUserWatchList] = useState(false);
+  // const [isInUserWatchList, setIsInUserWatchList] = useState(false);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -56,12 +78,80 @@ const MovieDetails = () => {
     if (id) fetchMovieCrew();
   }, [id]);
 
-  //function for adding to user library
+  //retrieve rating if in users library
+  const checkUsersRating = async () => {
+    if (!user) return;
 
+    try {
+      const userLibraryRef = doc(database, "userLibraries", user.uid);
+      const userLibrarySnap = await getDoc(userLibraryRef);
+
+      if (userLibrarySnap.exists()) {
+        const data = userLibrarySnap.data();
+        const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+        const currentMovie = reviews.find(
+          (review) => review.movie && review.movie.id === movie.id
+        );
+        setUsersRating(currentMovie ? currentMovie.userRating : null);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      checkUsersRating();
+    }
+  }, [user, movie]);
+
+  //function to check if movie is in database
+
+  const checkIfMovieInLibrary = async () => {
+    if (!user || !movie) return;
+
+    try {
+      const userLibraryRef = doc(database, "userLibraries", user.uid);
+      const userLibrarySnap = await getDoc(userLibraryRef);
+
+      if (userLibrarySnap.exists()) {
+        const data = userLibrarySnap.data();
+        const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+        const currentMovie = reviews.find(
+          (review) => review.movie && review.movie.id === movie.id
+        );
+        if (currentMovie) {
+          setisInUserLibrary(true);
+        } else {
+          setisInUserLibrary(false);
+        }
+      } else {
+        setisInUserLibrary(false);
+      }
+    } catch (error) {
+      setisInUserLibrary(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      checkIfMovieInLibrary();
+    }
+  }, [user, movie]);
+
+  //show modals
+
+  const handleShowAddToLibraryModal = () => {
+    setShowAddToLibraryModal(true);
+  };
+  const handleShowAddToWatchListModal = () => {
+    setShowAddToWatchListModal(true);
+  };
+
+  //----Prettyfying render--------------------------------
+
+  //extracting releaseYear and date separately
   const releaseYear = movie?.release_date
-    ? new Date(movie.release_date).getFullYear()
-    : "";
-  const releaseDate = movie?.release_date
     ? new Date(movie.release_date).getFullYear()
     : "";
 
@@ -107,19 +197,31 @@ const MovieDetails = () => {
                 <div className={styles.movieToolsContainer}>
                   <div>
                     {isInUserLibrary ? (
-                      <Button>Remove from library</Button>
+                      <Button className={styles.addToLibraryButton}>
+                        Remove from library
+                      </Button>
                     ) : (
-                      <Button>Add To library</Button>
+                      <Button
+                        className={styles.removeFromLibraryButton}
+                        onClick={handleShowAddToLibraryModal}
+                      >
+                        Add To library
+                      </Button>
                     )}
                   </div>
-                  <div>
-                    {isInUserWatchList ? (
-                      <Button>Remove from Watchlist</Button>
-                    ) : (
-                      <Button>Add To Watchlist</Button>
+                  <div className={styles.userRatingWrapper}>
+                    {usersRating && (
+                      <>
+                        <p>
+                          You've already rated {movie.title} a {usersRating} of
+                          10!
+                        </p>
+                        <div className={styles.userRatingContainer}>
+                          <StarRater value={usersRating}></StarRater>
+                        </div>
+                      </>
                     )}
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -201,6 +303,15 @@ const MovieDetails = () => {
               </div>
             </div>
           </div>
+          {showAddToLibraryModal && (
+            <Modal containerClassName={styles.movieDetailsModal}>
+              <AddToLibrary
+                movie={movie}
+                crew={movieCrew}
+                setShowAddToLibraryModal={setShowAddToLibraryModal}
+              ></AddToLibrary>
+            </Modal>
+          )}
         </>
       )}
     </div>

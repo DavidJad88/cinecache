@@ -1,0 +1,10 @@
+.ratingStar {
+  min-height: auto;
+  display: flex;
+
+  font-size: var(--medium-font-size);
+}
+
+.ratingStar:hover {
+  cursor: pointer;
+}

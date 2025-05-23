@@ -1,0 +1,66 @@
+.addToLibraryWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: auto;
+  color: var(--text-light);
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-medium);
+}
+
+.ratingContainer {
+  display: flex;
+  flex-direction: column;
+}
+.starsContainer {
+  display: flex;
+}
+.ratingTextContainer {
+  display: flex;
+  justify-content: center;
+}
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reviewTextArea {
+  padding: var(--space-small);
+}
+
+.reviewTextArea:focus {
+  outline: none;
+}
+
+.addToLibraryButton {
+  width: 200px;
+  height: 48px;
+  background-color: var(--button-color-cta);
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius-large);
+}
+
+.addToLibraryButton:hover {
+  background-color: var(--button-color-cta-hover);
+}
+
+.closeAddModalButton {
+  width: 200px;
+  height: 48px;
+  background-color: var(--secondary-color-light);
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius-large);
+}
+.closeAddModalButton:hover {
+  width: 200px;
+  height: 48px;
+  background-color: var(--primary-color-light);
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius-large);
+}

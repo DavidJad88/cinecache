@@ -63,8 +63,30 @@
   height: 100%;
   width: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: end;
   align-items: flex-end;
+}
+
+.addToLibraryButton,
+.removeFromLibraryButton {
+  width: 150px;
+  height: 48px;
+  background-color: var(--button-color-cta);
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius-large);
+}
+.addToLibraryButton:hover,
+.removeFromLibraryButton:hover {
+  background-color: var(--button-color-cta-hover);
+}
+.userRatingwrapper {
+  display: flex;
+  flex-direction: column;
+}
+.userRatingContainer {
+  display: flex;
+  justify-content: end;
 }
 
 /* ------------- */
@@ -155,4 +177,16 @@
 
 .characterName {
   font-family: var(--font-zain-italic);
+}
+
+.movieDetailsModal {
+  width: 100%;
+  min-height: auto;
+
+  background: #262828;
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 76%
+  );
 }

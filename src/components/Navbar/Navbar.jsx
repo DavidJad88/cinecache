@@ -77,7 +77,9 @@ const Navbar = () => {
           {user ? (
             <div className={styles.userTools}>
               <div className={styles.userIcon}>
-                <img src="/assets/icons/user.svg" alt="user profile icon" />
+                <Link to={"/profile"}>
+                  <img src="/assets/icons/user.svg" alt="user profile icon" />
+                </Link>
               </div>
               <Button className={styles.signOutButton} onClick={handleSignOut}>
                 Sign Out

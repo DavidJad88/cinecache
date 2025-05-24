@@ -95,7 +95,7 @@ const MovieDetails = () => {
         setUsersRating(currentMovie ? currentMovie.userRating : null);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
@@ -269,9 +269,15 @@ const MovieDetails = () => {
                 </div>
                 <div>
                   <p className={styles.detailHeading}>Produced By:</p>
-                  {movie.production_companies.map((company) => {
-                    return <p key={company.id}>{company.name}</p>;
-                  })}
+                  <div className={styles.productionCompanyWrapper}>
+                    {movie.production_companies.map((company) => {
+                      return (
+                        <div>
+                          <p key={company.id}>{company.name}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>

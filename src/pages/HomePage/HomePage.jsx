@@ -64,8 +64,10 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <h1>Browse the latest titles</h1>
-      <MovieScroller queryParam={28}></MovieScroller>
+      <div className={styles.latestReleasesSection}>
+        <h1>Browse the latest titles</h1>
+        <MovieScroller queryParam={28}></MovieScroller>
+      </div>
     </div>
   );
 };

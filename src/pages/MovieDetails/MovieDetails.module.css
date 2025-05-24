@@ -111,10 +111,11 @@
   flex-direction: column;
   padding: 0 var(--space-small);
   gap: var(--space-small);
+  overflow-y: scroll;
 }
 
 .movieDetailsContainer {
-  height: 300px;
+  height: 100%;
   width: 50%;
   padding: 0 var(--space-small);
   color: white;
@@ -130,6 +131,21 @@
 }
 .detailHeading {
   flex-grow: 1;
+  min-width: fit-content;
+}
+.productionCompanyWrapper {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.productionCompanyWrapper div {
+  min-width: fit-content;
+  padding-right: var(--space-medium);
+  border-right: 1px solid var(--text-light);
+}
+
+.productionCompanyWrapper div:last-child {
+  border-right: none;
 }
 
 /* --------------- */

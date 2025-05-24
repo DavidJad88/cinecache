@@ -1,0 +1,16 @@
+main {
+  width: 100%;
+  min-height: 100vh;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background: #262828;
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 76%
+  );
+  padding: var(--space-large);
+}

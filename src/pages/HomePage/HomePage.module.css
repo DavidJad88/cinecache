@@ -111,6 +111,7 @@
   background-color: var(--primary-color-accent);
   transition: background-color 0.5s;
   border-radius: var(--border-radius-medium);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 .featureCard:hover {
@@ -146,6 +147,7 @@
   max-width: 1200px;
   min-height: 500px;
   display: flex;
+  flex-direction: column;
   flex-basis: 33%;
-  background-color: var(--secondary-color);
+  color: white;
 }

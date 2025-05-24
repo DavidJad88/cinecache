@@ -8,6 +8,7 @@ import App from "../App";
 import HomePage from "../pages/HomePage/HomePage";
 import MovieDetails from "../pages/MovieDetails/MovieDetails";
 import MovieList from "../pages/MovieList/MovieList";
+import MovieLibrary from "../pages/MovieLibrary/MovieLibrary";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import Profile from "../pages/Profile/Profile";
 import SignIn from "../pages/SignIn/SignIn";
@@ -21,6 +22,8 @@ export const router = createBrowserRouter(
       <Route index element={<HomePage />} />
       <Route path="/movie-list" element={<MovieList />} />
       <Route path="/movie-list/:id" element={<MovieDetails />} />
+      <Route path="/movie-library" element={<MovieLibrary />} />
+
       <Route path="/profile" element={<Profile />} />
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />

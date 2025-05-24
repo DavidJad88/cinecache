@@ -114,7 +114,7 @@ const Navbar = () => {
           >
             Contact Us
           </NavLink>
-          {user && <NavLink to={"/profile"}>My Cache</NavLink>}
+          {user && <NavLink to={"/movie-library"}>My Cache</NavLink>}
         </div>
       </div>
     </nav>

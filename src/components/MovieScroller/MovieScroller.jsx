@@ -10,7 +10,11 @@ const MovieScroller = ({ queryParam }) => {
   return (
     <div className={styles.scrollerWrapper}>
       {fetchedFilms.map((film) => {
-        return <MovieCard key={film.id} film={film}></MovieCard>;
+        return (
+          <>
+            <MovieCard key={film.id} film={film}></MovieCard>;
+          </>
+        );
       })}
     </div>
   );

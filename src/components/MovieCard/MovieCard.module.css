@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.movieCard h2 {
+  color: var(--text-light);
+}
+
 .movieCard:hover {
   cursor: pointer;
 }

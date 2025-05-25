@@ -1,0 +1,33 @@
+.movieLibrary {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movieGrid {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-medium);
+  padding: var(--space-large) var(--space-x-large);
+  color: var(--text-light);
+}
+
+.libraryMovieCard {
+  width: 100%;
+  height: auto;
+}
+.ratingContainer {
+  display: flex;
+  width: 100%;
+}
+
+.reviewContainer {
+  max-width: 100%;
+  word-wrap: break-word;
+}

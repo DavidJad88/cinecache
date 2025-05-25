@@ -1,3 +1,8 @@
+.starRatingWrapper {
+  max-width: 100%;
+
+  display: flex;
+}
 .ratingStar {
   min-height: auto;
   display: flex;

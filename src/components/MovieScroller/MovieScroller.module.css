@@ -1,9 +1,10 @@
 .scrollerWrapper {
   width: 100%;
   max-width: 1200px;
-  height: 370px;
+  height: 400px;
   display: flex;
   overflow-x: scroll;
+  overflow-y: hidden;
   gap: var(--space-medium);
   scrollbar-color: var(--primary-color-accent);
 }

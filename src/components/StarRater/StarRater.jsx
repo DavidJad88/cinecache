@@ -13,11 +13,11 @@ const StarRater = ({ userRating, setUserRating, value, readOnly = false }) => {
 
   return (
     <>
-      {[...Array(10)].map((star, index) => {
-        const currentRate = index + 1;
+      <div className={styles.starRatingWrapper}>
+        {[...Array(10)].map((star, index) => {
+          const currentRate = index + 1;
 
-        return (
-          <>
+          return (
             <FaStar
               key={currentRate}
               className={styles.ratingStar}
@@ -37,9 +37,9 @@ const StarRater = ({ userRating, setUserRating, value, readOnly = false }) => {
                 cursor: readOnly ? "default" : "pointer",
               }}
             ></FaStar>
-          </>
-        );
-      })}
+          );
+        })}
+      </div>
     </>
   );
 };

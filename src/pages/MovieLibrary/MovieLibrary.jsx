@@ -16,6 +16,9 @@ const MovieLibrary = () => {
 
   const baseImgUrl = "https://image.tmdb.org/t/p/w300";
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     const fetchUserLibrary = async () => {
       try {
         const libraryDocRef = doc(database, "userLibraries", user.uid);
@@ -26,7 +29,7 @@ const MovieLibrary = () => {
           console.log("library not found");
         }
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     };
     fetchUserLibrary();
@@ -39,7 +42,7 @@ const MovieLibrary = () => {
           <div className={styles.movieGrid}>
             {userLibrary?.reviews?.map((libraryItem) => {
               return (
-                <div>
+                <div key={libraryItem.movie.id}>
                   <MovieCard
                     film={libraryItem.movie}
                     className={styles.libraryMovieCard}

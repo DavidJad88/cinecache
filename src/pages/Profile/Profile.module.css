@@ -1,8 +1,10 @@
 .profile {
   width: 100%;
+  min-height: 100vh;
+  height: auto;
   max-width: 1200px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
 }
 .profileInfoWrapper {
   width: 350px;

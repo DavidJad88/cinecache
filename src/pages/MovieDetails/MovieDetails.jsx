@@ -12,6 +12,7 @@ import { database } from "../../../firebaseConfig";
 import { getAuthContext } from "../../context/authContext";
 
 import { countryCodes, countryLanguages } from "../../data/countryCode";
+import RemoveFromLibrary from "../../components/RemoveFromLibrary/RemoveFromLibrary";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -144,9 +145,13 @@ const MovieDetails = () => {
   const handleShowAddToLibraryModal = () => {
     setShowAddToLibraryModal(true);
   };
-  const handleShowAddToWatchListModal = () => {
-    setShowAddToWatchListModal(true);
+
+  const handleShowRemoveFromLibraryModal = () => {
+    setShowRemoveFromLibraryModal(true);
   };
+  // const handleShowAddToWatchListModal = () => {
+  //   setShowAddToWatchListModal(true);
+  // };
 
   //----Prettyfying render--------------------------------
 
@@ -197,7 +202,10 @@ const MovieDetails = () => {
                 <div className={styles.movieToolsContainer}>
                   <div>
                     {isInUserLibrary ? (
-                      <Button className={styles.addToLibraryButton}>
+                      <Button
+                        className={styles.addToLibraryButton}
+                        onClick={handleShowRemoveFromLibraryModal}
+                      >
                         Remove from library
                       </Button>
                     ) : (
@@ -310,12 +318,20 @@ const MovieDetails = () => {
             </div>
           </div>
           {showAddToLibraryModal && (
-            <Modal containerClassName={styles.movieDetailsModal}>
+            <Modal containerClassName={styles.addOrRemoveModal}>
               <AddToLibrary
                 movie={movie}
                 crew={movieCrew}
                 setShowAddToLibraryModal={setShowAddToLibraryModal}
-              ></AddToLibrary>
+              />
+            </Modal>
+          )}
+          {showRemoveFromLibraryModal && (
+            <Modal containerClassName={styles.addOrRemoveModal}>
+              <RemoveFromLibrary
+                movie={movie}
+                setShowRemoveFromLibraryModal={setShowRemoveFromLibraryModal}
+              />
             </Modal>
           )}
         </>

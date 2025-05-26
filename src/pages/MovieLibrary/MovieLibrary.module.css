@@ -19,7 +19,6 @@
   max-width: 1200px;
   height: auto;
   display: grid;
-
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--space-medium);
   padding: var(--space-large) var(--space-x-large);
@@ -38,4 +37,11 @@
 .reviewContainer {
   max-width: 100%;
   word-wrap: break-word;
+}
+
+.emptyLibraryWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--text-light);
 }

@@ -195,7 +195,7 @@
   font-family: var(--font-zain-italic);
 }
 
-.movieDetailsModal {
+.addOrRemoveModal {
   width: 100%;
   min-height: auto;
 

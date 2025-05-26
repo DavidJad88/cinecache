@@ -1,0 +1,23 @@
+.removeFromLibraryWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: auto;
+  color: var(--text-light);
+  gap: var(--space-medium);
+}
+
+.confirmDeleteButton,
+.cancelDeleteButton {
+  width: 200px;
+  height: 48px;
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius-large);
+}
+.confirmDeleteButton {
+  background-color: var(--button-color-cta);
+}
+.confirmDeleteButton:hover {
+  background-color: var(--button-color-cta-hover);
+}

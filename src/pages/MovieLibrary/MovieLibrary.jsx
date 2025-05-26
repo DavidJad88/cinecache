@@ -1,7 +1,7 @@
 import styles from "./MovieLibrary.module.css";
 
 import { getAuthContext } from "../../context/authContext";
-import { auth, database } from "../../../firebaseConfig";
+import { database } from "../../../firebaseConfig";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
@@ -26,6 +26,7 @@ const MovieLibrary = () => {
         if (libraryDoc.exists()) {
           setUserLibrary(libraryDoc.data());
         } else {
+          setUserLibrary(null);
           console.log("library not found");
         }
       } catch (error) {
@@ -37,7 +38,8 @@ const MovieLibrary = () => {
 
   return (
     <div className={styles.movieLibrary}>
-      {userLibrary ? (
+      {Array.isArray(userLibrary?.reviews) &&
+      userLibrary.reviews.length != 0 ? (
         <>
           <div className={styles.movieGrid}>
             {userLibrary?.reviews?.map((libraryItem) => {
@@ -61,10 +63,10 @@ const MovieLibrary = () => {
           </div>
         </>
       ) : (
-        <>
+        <div className={styles.emptyLibraryWrapper}>
           <h1>Nothing here yet!</h1>
-          <p>go ahead, browse some movie and add them to your library!</p>
-        </>
+          <p>Go ahead, browse some movies and add them to your library!</p>
+        </div>
       )}
     </div>
   );

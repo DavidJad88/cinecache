@@ -153,7 +153,7 @@ const Navbar = () => {
               to={"/movie-library"}
               className={({ isActive }) => (isActive ? styles.activeLink : "")}
             >
-              My Cache
+              Library
             </NavLink>
           )}
         </div>

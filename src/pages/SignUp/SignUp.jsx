@@ -22,6 +22,8 @@ const SignUp = () => {
     previewUrl: "",
   });
 
+  const [error, setError] = useState("");
+
   const fileInputRef = useRef(null);
 
   //validation function from custom hook
@@ -73,6 +75,44 @@ const SignUp = () => {
     fileInputRef.current.value = "";
   };
 
+  //uploading image to cloudinary storage
+  const uploadImage = async () => {
+    if (!signUpFormData.profilePicture) {
+      console.log("No picture selected");
+      return null;
+    }
+    const formData = new FormData();
+    formData.append("file", signUpFormData.profilePicture);
+    formData.append(
+      "upload_preset",
+      import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+    );
+    formData.append("cloud_name", import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+        }/upload`,
+        { method: "POST", body: formData }
+      );
+      const data = await response.json();
+      console.log("Cloudinary response:", data);
+      console.log("image URL", data.secure_url);
+      console.log("Public ID", data.public_id);
+
+      setSignUpFormData((prevDetails) => ({
+        ...prevDetails,
+        previewUrl: data.secure_url,
+      }));
+      setError(null);
+
+      return data.secure_url;
+    } catch (error) {
+      setError("Failed to upload the image");
+      console.log(error.message);
+      return null;
+    }
+  };
   // handle form submit
 
   const handleFormSubmit = async (e) => {
@@ -89,6 +129,11 @@ const SignUp = () => {
       const user = userCredentials.user;
       console.log("User created successfully", userCredentials.user);
 
+      let profilePictureUrl = null;
+      if (signUpFormData.profilePicture) {
+        profilePictureUrl = await uploadImage();
+      }
+
       await setDoc(doc(database, "users", user.uid), {
         uid: user.uid,
         firstname: signUpFormData.firstname,
@@ -96,7 +141,7 @@ const SignUp = () => {
         email: user.email,
         dateOfBirth: signUpFormData.dateOfBirth || "",
         userName: signUpFormData.userName,
-        profilePicture: null,
+        profilePicture: profilePictureUrl,
         createdAt: serverTimestamp(),
       });
       console.log("User added to firestore DB");
@@ -203,7 +248,13 @@ const SignUp = () => {
                 alt="profile picture preview"
                 className={styles.imagePreview}
               />
-              <Button className={styles.removeImageButton}>Change Image</Button>
+              <Button
+                className={styles.removeImageButton}
+                type={"button"}
+                onClick={handleRemoveImage}
+              >
+                Change Image
+              </Button>
             </div>
           )}
         </fieldset>
@@ -255,12 +306,7 @@ const SignUp = () => {
             <p className={styles.errorMessage}>{errors.confirmPassword}</p>
           )}
         </fieldset>
-        <Button
-          className={styles.createAccountButton}
-          onClick={() => handleRemoveImage()}
-        >
-          Create Account
-        </Button>
+        <Button className={styles.createAccountButton}>Create Account</Button>
       </form>
     </div>
   );

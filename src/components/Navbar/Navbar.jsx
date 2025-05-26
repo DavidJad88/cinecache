@@ -1,17 +1,39 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Button from "../Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAuthContext } from "../../context/authContext";
-import { auth } from "../../../firebaseConfig";
+import { auth, database } from "../../../firebaseConfig";
 import { signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 const Navbar = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [userData, setUserData] = useState(null);
 
   // context
   const { user } = getAuthContext();
+
+  //getting user data
+  useEffect(() => {
+    const fetcUserData = async () => {
+      if (!user) return;
+      try {
+        const userDocRef = doc(database, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        } else {
+          console.log("User Not Found");
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetcUserData();
+  }, [user]);
 
   const navigate = useNavigate();
 
@@ -78,7 +100,19 @@ const Navbar = () => {
             <div className={styles.userTools}>
               <div className={styles.userIcon}>
                 <Link to={"/profile"}>
-                  <img src="/assets/icons/user.svg" alt="user profile icon" />
+                  {userData?.profilePicture ? (
+                    <img
+                      src={userData?.profilePicture}
+                      alt="user profile picure"
+                      className={styles.userIcon}
+                    />
+                  ) : (
+                    <img
+                      src="/assets/icons/user.svg"
+                      alt="user profile icon"
+                      className={styles.userIcon}
+                    />
+                  )}
                 </Link>
               </div>
               <Button className={styles.signOutButton} onClick={handleSignOut}>

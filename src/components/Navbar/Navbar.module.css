@@ -53,8 +53,15 @@
   display: flex;
   gap: var(--space-small);
 }
+
 .userTools img {
   height: 32px;
+}
+
+.userIcon {
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1;
 }
 
 .signInButton {

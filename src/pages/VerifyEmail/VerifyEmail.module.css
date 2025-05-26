@@ -1,0 +1,64 @@
+.verifyWrapper {
+  display: flex;
+  justify-content: center;
+
+  min-height: 250px;
+}
+
+.verificationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--space-medium);
+  color: var(--text-light);
+  text-align: center;
+  padding: var(--space-large);
+
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 90%
+  );
+  border-radius: var(--border-radius-large);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.verificationTitle {
+  font-size: var(--large-font-size);
+  color: var(--text-light);
+}
+
+.verificationText {
+  font-size: var(--base-font-size);
+  color: var(--primary-color-light);
+  margin-bottom: var(--space-medium);
+}
+
+.resendButton {
+  background: var(--button-color-cta);
+  color: black;
+  border: none;
+  padding: var(--space-medium) var(--space-large);
+  font-size: var(--base-font-size);
+  border-radius: var(--border-radius-medium);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.resendButton:hover {
+  background: var(--button-color-cta-hover);
+}
+
+.successMessage {
+  color: var(--text-light);
+  font-size: var(--base-font-size);
+  margin-top: var(--space-small);
+}
+
+.errorMessage {
+  color: var(--text-error);
+  font-size: var(--base-font-size);
+  margin-top: var(--space-small);
+}

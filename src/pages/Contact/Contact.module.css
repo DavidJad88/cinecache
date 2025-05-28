@@ -1,0 +1,98 @@
+.contact {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background: #262828;
+  background: linear-gradient(
+    0deg,
+    rgba(38, 40, 40, 1) 0%,
+    rgba(87, 87, 87, 1) 76%
+  );
+}
+
+.contactForm {
+  width: 50%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+  padding: var(--space-large);
+  background-color: var(--primary-color-light);
+  border-radius: var(--border-radius-medium);
+}
+
+.userContactSection,
+.unknownContactSection,
+.messageSection {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.userContactSection {
+  padding: var(--space-medium);
+}
+
+.unknownContactSection fieldset {
+  padding: var(--space-medium);
+  border-radius: var(--border-radius-medium);
+}
+
+.messageSection fieldset {
+  padding: var(--space-medium);
+  border-radius: var(--border-radius-medium);
+}
+
+.contactFormGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactFormGroup input {
+  height: 32px;
+  padding-left: var(--space-small);
+}
+.contactFormGroup p {
+  color: var(--text-error);
+}
+
+.contactFormMessage {
+  padding: var(--space-small);
+}
+
+.contactFormGroup textarea {
+  resize: none;
+}
+.contactFormToolsContainer {
+  display: flex;
+  justify-content: center;
+}
+.contactFormSubmit {
+  width: 200px;
+  height: 48px;
+  border-radius: var(--border-radius-medium);
+  border: none;
+  background-color: var(--button-color-cta);
+  color: var(--text-light);
+}
+.contactFormSubmit:hover {
+  background-color: var(--button-color-cta-hover);
+}
+
+.closeModalButton {
+  width: 200px;
+  height: 48px;
+  border-radius: var(--border-radius-medium);
+  border: none;
+  background-color: var(--button-color-cta);
+  color: var(--text-light);
+}
+
+.closeModalButton:hover {
+  background-color: var(--button-color-cta-hover);
+}

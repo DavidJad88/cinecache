@@ -67,14 +67,16 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarTopRow}>
-        <div className={styles.logoContainer}>
-          <div className={styles.logo}>
-            <img src="/assets/icons/clapper.svg" alt="camera clapper icon" />
+        <Link to={"/"}>
+          <div className={styles.logoContainer}>
+            <div className={styles.logo}>
+              <img src="/assets/icons/clapper.svg" alt="camera clapper icon" />
+            </div>
+            <div className={styles.siteLogoContainer}>
+              <h1>CineCache</h1>
+            </div>
           </div>
-          <div className={styles.siteLogoContainer}>
-            <h1>CineCache</h1>
-          </div>
-        </div>
+        </Link>
         <div className={styles.userToolsContainer}>
           <div className={styles.searchContainer}>
             <label

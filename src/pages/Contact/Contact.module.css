@@ -96,3 +96,9 @@
 .closeModalButton:hover {
   background-color: var(--button-color-cta-hover);
 }
+
+.contactModalContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+}

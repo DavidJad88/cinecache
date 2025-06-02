@@ -18,7 +18,7 @@ import useContactValidation from "../../hooks/useContactValidation";
 
 const Contact = () => {
   const [currentUserData, setCurrentUserData] = useState({});
-  const [showContactModal, setShowContactModal] = useState(true);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const [contactFormData, setContactFormData] = useState({
     firstName: "",

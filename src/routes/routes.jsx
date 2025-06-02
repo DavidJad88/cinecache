@@ -3,6 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import { RouteGuard } from "./RouteGuard";
 
 import App from "../App";
 import HomePage from "../pages/HomePage/HomePage";
@@ -21,14 +22,43 @@ export const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index element={<HomePage />} />
       <Route path="/movie-list" element={<MovieList />} />
-      <Route path="/movie-list/:id" element={<MovieDetails />} />
-      <Route path="/movie-library" element={<MovieLibrary />} />
-
-      <Route path="/profile" element={<Profile />} />
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/contact" element={<Contact />} />
+
+      <Route
+        path="/movie-list/:id"
+        element={
+          <RouteGuard>
+            <MovieDetails />
+          </RouteGuard>
+        }
+      />
+      <Route
+        path="/movie-library"
+        element={
+          <RouteGuard>
+            <MovieLibrary />
+          </RouteGuard>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <RouteGuard>
+            <Profile />
+          </RouteGuard>
+        }
+      />
+      <Route
+        path="/verify-email"
+        element={
+          <RouteGuard>
+            <VerifyEmail />
+          </RouteGuard>
+        }
+      />
+
       <Route path="/*" element={<PageNotFound />} />
     </Route>
   )

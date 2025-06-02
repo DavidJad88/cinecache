@@ -6,15 +6,19 @@ const authContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isVerifyingUser, setIsVerifyingUser] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setIsVerifyingUser(false);
     });
     return () => unsubscribe();
   }, []);
   return (
-    <authContext.Provider value={{ user }}>{children}</authContext.Provider>
+    <authContext.Provider value={{ user, isVerifyingUser }}>
+      {children}
+    </authContext.Provider>
   );
 };
 

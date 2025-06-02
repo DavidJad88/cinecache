@@ -45,10 +45,12 @@ a {
 
   /* Fonts */
   --base-font-size: 1rem;
+  --mediumplus-font-size: 1.2rem;
   --medium-font-size: 1.5rem;
   --large-font-size: 2rem;
   --x-large-font-size: 3rem;
   --xx-large-font-size: 4rem;
+
   --font-zain-italic: "Zain-Italic", Arial, sans-serif;
   --font-zain-light: "Zain-Light";
 

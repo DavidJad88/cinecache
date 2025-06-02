@@ -233,49 +233,49 @@ const MovieDetails = () => {
                 </div>
               </div>
             </div>
+            <div className={styles.summaryContainer}>
+              <p>Overview:</p>
+              <p className={styles.movieSummary}>"{movie.overview}"</p>
+            </div>
             <div className={styles.movieOverviewWrapper}>
-              <div className={styles.movieOverviewContainer}>
+              <div className={styles.moviePosterContainer}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={`${movie.title} poster image`}
                 />
-                <div className={styles.summaryContainer}>
-                  <p>Overview:</p>
-                  <p className={styles.movieOverview}>"{movie.overview}"</p>
-                </div>
               </div>
               <div className={styles.movieDetailsContainer}>
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Country of origin</p>{" "}
                   <p>{countryName}</p>
                 </div>
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Directed by</p>{" "}
                   {directorObj?.map((director) => {
                     return <p key={director.id}>{director.name}</p>;
                   })}
                 </div>
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Runtime</p>{" "}
                   <p>{movie.runtime} Minutes</p>
                 </div>
 
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Genre</p>
                   {movie.genres.map((genre) => {
                     return <p key={genre.id}>{genre.name}</p>;
                   })}
                 </div>
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Language</p>{" "}
                   <p>{languageName}</p>
                 </div>
 
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Release Date</p>{" "}
                   <p>{movie.release_date}</p>
                 </div>
-                <div>
+                <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Produced By:</p>
                   <div className={styles.productionCompanyWrapper}>
                     {movie.production_companies.map((company) => {

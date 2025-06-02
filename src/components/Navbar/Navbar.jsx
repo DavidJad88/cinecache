@@ -1,6 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 import { useEffect, useState } from "react";
 import { getAuthContext } from "../../context/authContext";
 import { auth, database } from "../../../firebaseConfig";
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [userData, setUserData] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // context
   const { user } = getAuthContext();
@@ -65,88 +67,148 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbarTopRow}>
-        <Link to={"/"}>
-          <div className={styles.logoContainer}>
-            <div className={styles.logo}>
-              <img src="/assets/icons/clapper.svg" alt="camera clapper icon" />
+    <>
+      <nav className={styles.navbar}>
+        <div className={styles.navbarTopRow}>
+          <Link to={"/"}>
+            <div className={styles.logoContainer}>
+              <div className={styles.logo}>
+                <img
+                  src="/assets/icons/clapper.svg"
+                  alt="camera clapper icon"
+                />
+              </div>
+              <div className={styles.siteLogoContainer}>
+                <h1>CineCache</h1>
+              </div>
             </div>
-            <div className={styles.siteLogoContainer}>
-              <h1>CineCache</h1>
-            </div>
-          </div>
-        </Link>
-        <div className={styles.userToolsContainer}>
-          <div className={styles.searchContainer}>
-            <label
-              htmlFor="search"
-              className={styles.searchIcon}
-              onClick={handleSearchbarVisible}
-            >
-              <img src="/assets/icons/search.svg" alt="Search Icon" />
-            </label>
-            {isSearching && (
-              <input
-                type="search"
-                name="search"
-                id="search"
-                className={styles.searchInput}
-                onBlur={handleHideSearchbar}
-                onChange={handleInputChange}
-                value={searchTerm}
-              />
-            )}
-          </div>
-          {user ? (
-            <div className={styles.userTools}>
-              <div className={styles.userIcon}>
-                <Link to={"/profile"}>
-                  {userData?.profilePicture ? (
-                    <img
-                      src={userData?.profilePicture}
-                      alt="user profile picure"
-                      className={styles.userIcon}
-                    />
-                  ) : (
-                    <img
-                      src="/assets/icons/user.svg"
-                      alt="user profile icon"
-                      className={styles.userIcon}
-                    />
-                  )}
+          </Link>
+          <div className={styles.userToolsContainer}>
+            {/* <div className={styles.searchContainer}>
+              <label
+                htmlFor="search"
+                className={styles.searchIcon}
+                onClick={handleSearchbarVisible}
+              >
+                <img src="/assets/icons/search.svg" alt="Search Icon" />
+              </label>
+              {isSearching && (
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  className={styles.searchInput}
+                  onBlur={handleHideSearchbar}
+                  onChange={handleInputChange}
+                  value={searchTerm}
+                />
+              )}
+            </div> */}
+            {user ? (
+              <div className={styles.userTools}>
+                <div className={styles.userIcon}>
+                  <Link to={"/profile"}>
+                    {userData?.profilePicture ? (
+                      <img
+                        src={userData?.profilePicture}
+                        alt="user profile picure"
+                        className={styles.userIcon}
+                      />
+                    ) : (
+                      <img
+                        src="/assets/icons/user.svg"
+                        alt="user profile icon"
+                        className={styles.userIcon}
+                      />
+                    )}
+                  </Link>
+                </div>
+                <Button
+                  className={styles.signOutButton}
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <div className={styles.signInContainer}>
+                <Link to={"/sign-in"}>
+                  <Button className={styles.signInButton}>Sign In</Button>
                 </Link>
               </div>
-              <Button className={styles.signOutButton} onClick={handleSignOut}>
-                Sign Out
-              </Button>
-            </div>
-          ) : (
-            <div className={styles.signInContainer}>
-              <Link to={"/sign-in"}>
-                <Button className={styles.signInButton}>Sign In</Button>
-              </Link>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-      <div className={styles.navbarBottomRow}>
-        <div className={styles.linksContainer}>
+        <div className={styles.navbarBottomRow}>
+          <div className={styles.hamburgerMenuContainer}>
+            <img
+              src="/assets/icons/menu.svg"
+              alt="links menu button"
+              onClick={() => setIsMobile(true)}
+            />
+          </div>
+          <div className={styles.linksContainerDesktop}>
+            <NavLink
+              to={"/"}
+              className={({ isActive }) => (isActive ? styles.activeLink : "")}
+              onClick={() => setIsMobile(false)}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to={"/movie-list"}
+              className={({ isActive }) => (isActive ? styles.activeLink : "")}
+              onClick={() => setIsMobile(false)}
+            >
+              Browse Movies
+            </NavLink>
+            <NavLink
+              to={"/contact"}
+              className={({ isActive }) => (isActive ? styles.activeLink : "")}
+              onClick={() => setIsMobile(false)}
+            >
+              Contact Us
+            </NavLink>
+            {user && (
+              <NavLink
+                to={"/movie-library"}
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : ""
+                }
+                onClick={() => setIsMobile(false)}
+              >
+                Library
+              </NavLink>
+            )}
+          </div>
+        </div>
+      </nav>
+      {isMobile && (
+        <Modal containerClassName={styles.linksContainerMobile}>
+          <Button
+            className={styles.closeLinksModalButton}
+            onClick={() => setIsMobile(false)}
+          >
+            X
+          </Button>
           <NavLink
             to={"/"}
             className={({ isActive }) => (isActive ? styles.activeLink : "")}
+            onClick={() => setIsMobile(false)}
           >
             Home
           </NavLink>
           <NavLink
             to={"/movie-list"}
             className={({ isActive }) => (isActive ? styles.activeLink : "")}
+            onClick={() => setIsMobile(false)}
           >
             Browse Movies
           </NavLink>
           <NavLink
             to={"/contact"}
             className={({ isActive }) => (isActive ? styles.activeLink : "")}
+            onClick={() => setIsMobile(false)}
           >
             Contact Us
           </NavLink>
@@ -154,13 +216,14 @@ const Navbar = () => {
             <NavLink
               to={"/movie-library"}
               className={({ isActive }) => (isActive ? styles.activeLink : "")}
+              onClick={() => setIsMobile(false)}
             >
               Library
             </NavLink>
           )}
-        </div>
-      </div>
-    </nav>
+        </Modal>
+      )}
+    </>
   );
 };
 

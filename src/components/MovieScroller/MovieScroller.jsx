@@ -12,7 +12,7 @@ const MovieScroller = ({ queryParam }) => {
       {fetchedFilms.map((film) => {
         return (
           <>
-            <MovieCard key={film.id} film={film}></MovieCard>;
+            <MovieCard key={film.id} film={film}></MovieCard>
           </>
         );
       })}

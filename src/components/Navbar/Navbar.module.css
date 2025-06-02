@@ -79,19 +79,72 @@
 
 /* --------------------- */
 
-.linksContainer {
+.linksContainerDesktop {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--space-large);
   font-size: var(--medium-font-size);
 }
+.hamburgerMenuContainer {
+  display: none;
+}
 
-.linksContainer a {
+.linksContainerMobile {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-large);
+  font-size: var(--medium-font-size);
+  border-radius: none;
+  background-color: var(--primary-color);
+}
+
+.linksContainerMobile a {
   color: var(--text-light);
 }
 
-.activeLink {
+.linksContainerDesktop a {
+  color: var(--text-light);
+}
+.linksContainerDesktop > .activeLink {
   border-bottom: 2px solid var(--text-light);
   transition: all 0.3s;
+}
+
+.linksContainerMobile > .activeLink {
+  border-bottom: 2px solid var(--text-light);
+  transition: all 0.3s;
+}
+
+.closeLinksModalButton {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+}
+
+@media screen and (max-width: 555px) {
+  .navbar {
+    padding: var(--space-medium) var(--space-small);
+  }
+  .linksContainerDesktop {
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .linksContainerDesktop {
+    display: none;
+  }
+  .hamburgerMenuContainer {
+    display: block;
+  }
 }

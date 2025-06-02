@@ -30,7 +30,7 @@ const HomePage = () => {
         <div className={styles.featureCard}>
           <div className={styles.featureCardIconWrapper}>
             <img src="/assets/icons/bookmark.svg" alt="save feature" />
-            <h3>Personal Collection</h3>
+            <h3>Library</h3>
           </div>
           <div className={styles.featureCardDescriptionWrapper}>
             <p>Save movies you love, or want to watch</p>

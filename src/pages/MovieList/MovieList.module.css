@@ -1,10 +1,11 @@
 .movieListWrapper {
   width: 100%;
+  max-width: 1200px;
   min-height: 100vh;
   max-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   background: #262828;
   background: linear-gradient(
@@ -12,12 +13,15 @@
     rgba(38, 40, 40, 1) 0%,
     rgba(87, 87, 87, 1) 76%
   );
-  padding: var(--space-x-large);
+  padding: var(--space-small);
   gap: var(--space-large);
 }
 
 .genreWrapper {
-  border-top: 2px dotted var(--primary-color-accent);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
   border-bottom: 2px dotted var(--primary-color-accent);
   padding: var(--space-medium) 0;
 }

@@ -86,10 +86,10 @@ const Profile = () => {
         </div>
 
         {/* User Library (Can be expanded with cards) */}
-        <div className={styles.librarySection}>
+        {/* <div className={styles.librarySection}>
           <h3>Your Movie Library</h3>
           <p>Coming soon: a list of movies you've watched or rated.</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -53,10 +53,7 @@ const MovieLibrary = () => {
                   <div className={styles.ratingContainer}>
                     <StarRater value={libraryItem.userRating}></StarRater>
                   </div>
-                  <div className={styles.reviewContainer}>
-                    <h3>Your Review:</h3>
-                    <p>{libraryItem.userReview}</p>
-                  </div>
+                  <div className={styles.libraryToolsContainer}></div>
                 </div>
               );
             })}

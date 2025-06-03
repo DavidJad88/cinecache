@@ -11,11 +11,11 @@
     rgba(38, 40, 40, 1) 0%,
     rgba(87, 87, 87, 1) 76%
   );
-  padding: var(--space-x-large);
+
   color: var(--primary-color);
 }
 .signUpForm {
-  width: 50%;
+  width: 90%;
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -92,4 +92,13 @@
 
 .removeImageButton:hover {
   background-color: #e60000; /* Slightly darker red for hover effect */
+}
+
+@media screen and (max-width: 500px) {
+  .signUpForm {
+    padding: var(--space-medium);
+  }
+  .formGroup {
+    padding: var(--space-small);
+  }
 }

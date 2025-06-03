@@ -12,7 +12,6 @@
     rgba(38, 40, 40, 1) 0%,
     rgba(87, 87, 87, 1) 76%
   );
-  padding: var(--space-x-large);
 }
 
 .formWrapper h2 {
@@ -21,7 +20,7 @@
 }
 
 .signInForm {
-  width: 50%;
+  width: 90%;
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -91,4 +90,13 @@
   flex: 1;
   height: 32px;
   color: var(--primary-color);
+}
+
+@media screen and (max-width: 500px) {
+  .signInForm {
+    padding: var(--space-medium);
+  }
+  .formGroup {
+    padding: var(--space-small);
+  }
 }

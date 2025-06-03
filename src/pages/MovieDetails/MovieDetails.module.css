@@ -12,7 +12,7 @@
     rgba(38, 40, 40, 1) 0%,
     rgba(87, 87, 87, 1) 76%
   );
-  padding: var(--space-x-large);
+  padding: var(--space-small);
 }
 
 .movieContainer {
@@ -36,12 +36,16 @@
 
 .movieImageOverlay {
   background: linear-gradient(rgba(0, 0, 0, 0.353), rgba(0, 0, 0, 0.232));
-  padding: 2rem;
+  padding: var(--space-large);
   position: absolute;
   bottom: 0;
   width: 100%;
   color: var(--text-light);
   display: flex;
+}
+
+.movieTitleContainer {
+  display: none;
 }
 .movieTitleWrapper {
   height: 100%;
@@ -101,7 +105,7 @@
 /* ------------- */
 .movieOverviewWrapper {
   width: 100%;
-  height: 350px;
+  height: 400px;
   display: flex;
 }
 .moviePosterContainer {
@@ -135,24 +139,41 @@
   display: flex;
   gap: var(--space-medium);
   border-bottom: 1px solid var(--text-light);
+  height: 69px;
+  align-items: center;
 }
 .detailHeading {
   flex-grow: 1;
   min-width: fit-content;
 }
-.productionCompanyWrapper {
+.genreWrapper {
+  height: 100%;
   display: flex;
   overflow-x: scroll;
+  gap: var(--space-medium);
+  text-align: right;
 }
-
-.productionCompanyWrapper div {
+.genreItem {
+  height: 100%;
+  display: flex;
+  align-items: end;
   min-width: fit-content;
-  padding: 0 var(--space-medium);
-  border-right: 1px solid var(--text-light);
+  text-align: right;
 }
 
-.productionCompanyWrapper div:last-child {
-  border-right: none;
+.productionCompanyWrapper {
+  height: 100%;
+  display: flex;
+  overflow-x: scroll;
+  gap: var(--space-medium);
+  text-align: right;
+}
+
+.companyItem {
+  height: 100%;
+  display: flex;
+  align-items: end;
+  min-width: fit-content;
 }
 
 /* --------------- */
@@ -212,4 +233,77 @@
     rgba(38, 40, 40, 1) 0%,
     rgba(87, 87, 87, 1) 76%
   );
+}
+
+@media screen and (max-width: 780px) {
+  .movieImageContainer {
+    height: 500px;
+  }
+
+  .movieImageOverlay {
+    padding: var(--space-small);
+  }
+
+  .moviePosterContainer {
+    display: none;
+  }
+
+  .movieDetailsContainer {
+    height: 100%;
+    width: 100%;
+  }
+  .addToLibraryButton,
+  .removeFromLibraryButton {
+    width: 150px;
+    height: 40px;
+    background-color: var(--button-color-cta);
+    font-size: var(--base-font-size);
+    border-radius: var(--border-radius-large);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .movieImageContainer {
+    height: 400px;
+  }
+
+  .summaryContainer {
+    font-size: var(--base-font-size);
+  }
+
+  .movieDetailsContainer {
+    font-size: var(--base-font-size);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movieImageContainer {
+    height: 350px;
+  }
+  .movieImageOverlay {
+    display: none;
+  }
+
+  .movieTitleContainer {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    color: var(--text-light);
+  }
+  .movieTitleWrapper {
+    width: 100%;
+  }
+  .movieToolsContainer {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .userRatingWrapper {
+    width: 100%;
+  }
+  .userRatingContainer {
+    display: flex;
+    justify-content: start;
+  }
 }

@@ -233,6 +233,46 @@ const MovieDetails = () => {
                 </div>
               </div>
             </div>
+            <div className={styles.movieTitleContainer}>
+              <div className={styles.movieTitleWrapper}>
+                <h2 className={styles.movieTitle}>{movie.title} </h2>
+                <p className={styles.movieReleaseYear}>({releaseYear})</p>
+                <p className={styles.movieTagline}>{movie.tagline}</p>
+              </div>
+              <div className={styles.movieToolsContainer}>
+                <div>
+                  {isInUserLibrary ? (
+                    <Button
+                      className={styles.addToLibraryButton}
+                      onClick={handleShowRemoveFromLibraryModal}
+                    >
+                      Remove from library
+                    </Button>
+                  ) : (
+                    <Button
+                      className={styles.removeFromLibraryButton}
+                      onClick={handleShowAddToLibraryModal}
+                    >
+                      Add To library
+                    </Button>
+                  )}
+                </div>
+                <div className={styles.userRatingWrapper}>
+                  {usersRating && (
+                    <>
+                      <p>
+                        You've already rated {movie.title} a {usersRating} of
+                        10!
+                      </p>
+                      <div className={styles.userRatingContainer}>
+                        <StarRater value={usersRating}></StarRater>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
             <div className={styles.summaryContainer}>
               <p>Overview:</p>
               <p className={styles.movieSummary}>"{movie.overview}"</p>
@@ -262,9 +302,15 @@ const MovieDetails = () => {
 
                 <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Genre</p>
-                  {movie.genres.map((genre) => {
-                    return <p key={genre.id}>{genre.name}</p>;
-                  })}
+                  <div className={styles.genreWrapper}>
+                    {movie.genres.map((genre) => {
+                      return (
+                        <div className={styles.genreItem} key={genre.id}>
+                          <p>{genre.name}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
                 <div className={styles.detailContainer}>
                   <p className={styles.detailHeading}>Language</p>{" "}
@@ -280,7 +326,7 @@ const MovieDetails = () => {
                   <div className={styles.productionCompanyWrapper}>
                     {movie.production_companies.map((company) => {
                       return (
-                        <div>
+                        <div className={styles.companyItem}>
                           <p key={company.id}>{company.name}</p>
                         </div>
                       );

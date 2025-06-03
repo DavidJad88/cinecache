@@ -5,9 +5,17 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 import { database } from "../../../firebaseConfig";
 import { getAuthContext } from "../../context/authContext";
+import { useEffect, useState } from "react";
 
-const RemoveFromLibrary = ({ movie, setShowRemoveFromLibraryModal }) => {
+const RemoveFromLibrary = ({
+  movie,
+  setShowRemoveFromLibraryModal,
+  setHasBeenRemoved,
+  hasBeenRemoved,
+}) => {
   const { user } = getAuthContext();
+  const [isRemoved, setIsRemoved] = useState(false);
+  const [removeError, setRemoveError] = useState(false);
 
   const handleDeleteMovie = async () => {
     if (!user || !movie) return;
@@ -22,12 +30,19 @@ const RemoveFromLibrary = ({ movie, setShowRemoveFromLibraryModal }) => {
           (review) => review.movie && review.movie.id !== movie.id
         );
         await updateDoc(userLibraryRef, { reviews: updatedReviews });
+        setIsRemoved(true);
       }
-      setShowRemoveFromLibraryModal(false);
+      // setShowRemoveFromLibraryModal(false);
     } catch (error) {
-      console.error("Error removing movie from library:", error);
+      setRemoveError("Error removing movie from library, please try again");
     }
   };
+
+  useEffect(() => {
+    if (hasBeenRemoved) {
+      setHasBeenRemoved(false);
+    }
+  }, [hasBeenRemoved]);
 
   return (
     <div className={styles.removeFromLibraryWrapper}>
@@ -35,19 +50,43 @@ const RemoveFromLibrary = ({ movie, setShowRemoveFromLibraryModal }) => {
         <p>Are you sure you want to remove {movie.title} from your library?</p>
       </div>
       <div>
-        <Button
-          className={styles.confirmDeleteButton}
-          onClick={handleDeleteMovie}
-        >
-          Confirm
-        </Button>
-        <Button
-          className={styles.cancelDeleteButton}
-          onClick={() => setShowRemoveFromLibraryModal(false)}
-        >
-          Cancel
-        </Button>
+        {isRemoved ? (
+          <Button
+            className={styles.confirmDeleteButton}
+            onClick={handleDeleteMovie}
+            disabled={true}
+          >
+            ✓
+          </Button>
+        ) : (
+          <Button
+            className={styles.confirmDeleteButton}
+            onClick={handleDeleteMovie}
+          >
+            Confirm
+          </Button>
+        )}
+        {isRemoved ? (
+          <Button
+            className={styles.cancelDeleteButton}
+            onClick={() => {
+              setShowRemoveFromLibraryModal(false);
+              setHasBeenRemoved(true);
+            }}
+          >
+            Close
+          </Button>
+        ) : (
+          <Button
+            className={styles.cancelDeleteButton}
+            onClick={() => setShowRemoveFromLibraryModal(false)}
+          >
+            Cancel
+          </Button>
+        )}
       </div>
+      {isRemoved && <p>{movie.title} has been removed from your library</p>}
+      {removeError && <p>{removeError}</p>}
     </div>
   );
 };

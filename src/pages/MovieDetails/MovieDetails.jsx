@@ -24,6 +24,9 @@ const MovieDetails = () => {
 
   const { user } = getAuthContext();
 
+  const [hasBeenAdded, setHasBeenAdded] = useState(false);
+  const [hasBeenRemoved, setHasBeenRemoved] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -77,7 +80,7 @@ const MovieDetails = () => {
       }
     };
     if (id) fetchMovieCrew();
-  }, [id]);
+  }, [id, hasBeenAdded, hasBeenRemoved]);
 
   //retrieve rating if in users library
   const checkUsersRating = async () => {
@@ -104,7 +107,7 @@ const MovieDetails = () => {
     if (user) {
       checkUsersRating();
     }
-  }, [user, movie]);
+  }, [user, movie, hasBeenAdded, hasBeenRemoved]);
 
   //function to check if movie is in database
 
@@ -138,7 +141,7 @@ const MovieDetails = () => {
     if (user) {
       checkIfMovieInLibrary();
     }
-  }, [user, movie]);
+  }, [user, movie, hasBeenAdded, hasBeenRemoved]);
 
   //show modals
 
@@ -369,6 +372,8 @@ const MovieDetails = () => {
                 movie={movie}
                 crew={movieCrew}
                 setShowAddToLibraryModal={setShowAddToLibraryModal}
+                setHasBeenAdded={setHasBeenAdded}
+                hasBeenAdded={hasBeenAdded}
               />
             </Modal>
           )}
@@ -377,6 +382,8 @@ const MovieDetails = () => {
               <RemoveFromLibrary
                 movie={movie}
                 setShowRemoveFromLibraryModal={setShowRemoveFromLibraryModal}
+                setHasBeenRemoved={setHasBeenRemoved}
+                hasBeenRemoved={hasBeenRemoved}
               />
             </Modal>
           )}

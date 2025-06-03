@@ -8,10 +8,17 @@ import { getAuthContext } from "../../context/authContext";
 import StarRater from "../StarRater/StarRater";
 import Button from "../Button/Button";
 
-const AddToLibrary = ({ movie, crew, setShowAddToLibraryModal }) => {
+const AddToLibrary = ({
+  movie,
+  crew,
+  setShowAddToLibraryModal,
+  setHasBeenAdded,
+  hasBeenAdded,
+}) => {
   const { user } = getAuthContext();
   const [userRating, setUserRating] = useState("");
   const [userReview, setUserReview] = useState("");
+  const [isAdded, setIsAdded] = useState(false);
 
   const [userReviewData, setUserReviewData] = useState([
     userReview,
@@ -49,6 +56,7 @@ const AddToLibrary = ({ movie, crew, setShowAddToLibraryModal }) => {
           `${movie.title} has been added to your library`
         );
         setAddErrorMessage("");
+        setIsAdded(true);
       } else {
         await setDoc(userLibraryRef, {
           reviews: [userReviewData],
@@ -66,6 +74,12 @@ const AddToLibrary = ({ movie, crew, setShowAddToLibraryModal }) => {
       );
     }
   };
+
+  useEffect(() => {
+    if (hasBeenAdded) {
+      setHasBeenAdded(false);
+    }
+  }, [hasBeenAdded]);
 
   return (
     <div className={styles.addToLibraryWrapper}>
@@ -103,16 +117,36 @@ const AddToLibrary = ({ movie, crew, setShowAddToLibraryModal }) => {
           <span>{userReview.length}/300</span>
         </div>
         <div className={styles.addToLibraryTools}>
-          <Button className={styles.addToLibraryButton} type={"submit"}>
-            Add to Library
-          </Button>
-          <Button
-            className={styles.closeAddModalButton}
-            onClick={() => setShowAddToLibraryModal(false)}
-            type={"button"}
-          >
-            Cancel
-          </Button>
+          {isAdded ? (
+            <Button className={styles.addToLibraryButton} disabled={true}>
+              ✓
+            </Button>
+          ) : (
+            <Button className={styles.addToLibraryButton} type={"submit"}>
+              Add to Library
+            </Button>
+          )}
+
+          {isAdded ? (
+            <Button
+              className={styles.closeAddModalButton}
+              onClick={() => {
+                setShowAddToLibraryModal(false);
+                setHasBeenAdded(true);
+              }}
+              type={"button"}
+            >
+              Close
+            </Button>
+          ) : (
+            <Button
+              className={styles.closeAddModalButton}
+              onClick={() => setShowAddToLibraryModal(false)}
+              type={"button"}
+            >
+              Cancel
+            </Button>
+          )}
         </div>
       </form>
       <div className={styles.addMessageContainer}>

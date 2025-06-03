@@ -64,9 +64,5 @@
   border-radius: var(--border-radius-large);
 }
 .closeAddModalButton:hover {
-  width: 200px;
-  height: 48px;
   background-color: var(--primary-color-light);
-  font-size: var(--base-font-size);
-  border-radius: var(--border-radius-large);
 }

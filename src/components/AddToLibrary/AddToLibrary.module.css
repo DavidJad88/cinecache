@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+
   min-height: auto;
   color: var(--text-light);
 }
 
 .reviewForm {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   gap: var(--space-medium);
@@ -37,9 +38,14 @@
 .reviewTextArea:focus {
   outline: none;
 }
-
+.addToLibraryTools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .addToLibraryButton {
-  width: 200px;
+  width: 150px;
   height: 48px;
   background-color: var(--button-color-cta);
   font-size: var(--base-font-size);
@@ -51,7 +57,7 @@
 }
 
 .closeAddModalButton {
-  width: 200px;
+  width: 150px;
   height: 48px;
   background-color: var(--secondary-color-light);
   font-size: var(--base-font-size);

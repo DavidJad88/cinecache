@@ -2,10 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
   width: 100%;
   min-height: auto;
   color: var(--text-light);
   gap: var(--space-medium);
+}
+
+.removeFromLibraryWrapper div {
+  text-align: center;
+  flex-wrap: wrap;
 }
 
 .confirmDeleteButton,

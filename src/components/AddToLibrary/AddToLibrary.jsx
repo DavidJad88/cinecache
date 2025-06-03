@@ -92,7 +92,7 @@ const AddToLibrary = ({ movie, crew, setShowAddToLibraryModal }) => {
           <textarea
             name="userReview"
             id="user-review"
-            cols={100}
+            cols={60}
             rows={10}
             className={styles.reviewTextArea}
             maxLength={300}
@@ -102,7 +102,7 @@ const AddToLibrary = ({ movie, crew, setShowAddToLibraryModal }) => {
           ></textarea>
           <span>{userReview.length}/300</span>
         </div>
-        <div>
+        <div className={styles.addToLibraryTools}>
           <Button className={styles.addToLibraryButton} type={"submit"}>
             Add to Library
           </Button>

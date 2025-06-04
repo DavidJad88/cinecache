@@ -7,10 +7,10 @@ import { getAuthContext } from "../../context/authContext";
 import { auth, database } from "../../../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-
+import { useSearch } from "../../context/searchContext";
 const Navbar = () => {
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const { searchTerm, setSearchTerm, isSearching, setIsSearching } =
+    useSearch();
   const [userData, setUserData] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -84,26 +84,6 @@ const Navbar = () => {
             </div>
           </Link>
           <div className={styles.userToolsContainer}>
-            {/* <div className={styles.searchContainer}>
-              <label
-                htmlFor="search"
-                className={styles.searchIcon}
-                onClick={handleSearchbarVisible}
-              >
-                <img src="/assets/icons/search.svg" alt="Search Icon" />
-              </label>
-              {isSearching && (
-                <input
-                  type="search"
-                  name="search"
-                  id="search"
-                  className={styles.searchInput}
-                  onBlur={handleHideSearchbar}
-                  onChange={handleInputChange}
-                  value={searchTerm}
-                />
-              )}
-            </div> */}
             {user ? (
               <div className={styles.userTools}>
                 <div className={styles.userIcon}>
@@ -140,45 +120,77 @@ const Navbar = () => {
           </div>
         </div>
         <div className={styles.navbarBottomRow}>
-          <div className={styles.hamburgerMenuContainer}>
-            <img
-              src="/assets/icons/menu.svg"
-              alt="links menu button"
-              onClick={() => setIsMobile(true)}
-            />
-          </div>
-          <div className={styles.linksContainerDesktop}>
-            <NavLink
-              to={"/"}
-              className={({ isActive }) => (isActive ? styles.activeLink : "")}
-              onClick={() => setIsMobile(false)}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to={"/movie-list"}
-              className={({ isActive }) => (isActive ? styles.activeLink : "")}
-              onClick={() => setIsMobile(false)}
-            >
-              Browse Movies
-            </NavLink>
-            <NavLink
-              to={"/contact"}
-              className={({ isActive }) => (isActive ? styles.activeLink : "")}
-              onClick={() => setIsMobile(false)}
-            >
-              Contact Us
-            </NavLink>
-            {user && (
+          {!isSearching && (
+            <div className={styles.hamburgerMenuContainer}>
+              <img
+                src="/assets/icons/menu.svg"
+                alt="links menu button"
+                onClick={() => setIsMobile(true)}
+              />
+            </div>
+          )}
+
+          {!isSearching && (
+            <div className={styles.linksContainerDesktop}>
               <NavLink
-                to={"/movie-library"}
+                to={"/"}
                 className={({ isActive }) =>
                   isActive ? styles.activeLink : ""
                 }
                 onClick={() => setIsMobile(false)}
               >
-                Library
+                Home
               </NavLink>
+              <NavLink
+                to={"/movie-list"}
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : ""
+                }
+                onClick={() => setIsMobile(false)}
+              >
+                Browse Movies
+              </NavLink>
+              <NavLink
+                to={"/contact"}
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : ""
+                }
+                onClick={() => setIsMobile(false)}
+              >
+                Contact Us
+              </NavLink>
+              {user && (
+                <NavLink
+                  to={"/movie-library"}
+                  className={({ isActive }) =>
+                    isActive ? styles.activeLink : ""
+                  }
+                  onClick={() => setIsMobile(false)}
+                >
+                  Library
+                </NavLink>
+              )}
+            </div>
+          )}
+
+          <div className={styles.searchContainer}>
+            <label
+              htmlFor="search"
+              className={styles.searchIcon}
+              onClick={handleSearchbarVisible}
+            >
+              <img src="/assets/icons/search.svg" alt="Search Icon" />
+            </label>
+            {isSearching && (
+              <input
+                type="search"
+                name="search"
+                id="search"
+                className={styles.searchInput}
+                onBlur={handleHideSearchbar}
+                onChange={handleInputChange}
+                value={searchTerm}
+              />
             )}
           </div>
         </div>

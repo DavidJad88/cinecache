@@ -1,0 +1,32 @@
+.searchOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 100;
+  overflow-y: auto;
+  color: #fff;
+  padding: 2rem;
+}
+
+.closeSearchButton {
+  position: absolute;
+  right: var(--space-large);
+  top: var(--space-large);
+  width: 32px;
+  height: 32px;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  font-size: var(--mediumplus-font-size);
+}
+
+.searchResultsContainer {
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-medium);
+}

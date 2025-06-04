@@ -9,6 +9,10 @@
   overflow-y: auto;
   color: #fff;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .closeSearchButton {

@@ -85,7 +85,7 @@ const AddToLibrary = ({
     <div className={styles.addToLibraryWrapper}>
       <h2>Add "{movie.title}" to your library?</h2>
 
-      <p>You can add a rating too if you`d like:</p>
+      <p>You can add a rating if you'd like:</p>
       <form className={styles.reviewForm} onSubmit={handleSubmit}>
         <div className={styles.ratingContainer}>
           <div className={styles.starsContainer}>
@@ -106,7 +106,7 @@ const AddToLibrary = ({
           <textarea
             name="userReview"
             id="user-review"
-            cols={60}
+            cols={50}
             rows={10}
             className={styles.reviewTextArea}
             maxLength={300}

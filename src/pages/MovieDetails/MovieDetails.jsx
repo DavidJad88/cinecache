@@ -101,9 +101,9 @@ const MovieDetails = () => {
         const data = userLibrarySnap.data();
         const reviews = Array.isArray(data.reviews) ? data.reviews : [];
         const currentMovie = reviews.find(
-          (review) => review.movie && review.movie.id === movie.id
+          (review) => review?.movie && review?.movie?.id === movie?.id
         );
-        setUsersRating(currentMovie ? currentMovie.userRating : null);
+        setUsersRating(currentMovie ? currentMovie?.userRating : null);
       }
     } catch (error) {
       console.log(error);
@@ -330,7 +330,7 @@ const MovieDetails = () => {
                   <div className={styles.detailContainer}>
                     <p className={styles.detailHeading}>Genre</p>
                     <div className={styles.genreWrapper}>
-                      {movie.genres.map((genre) => {
+                      {movie?.genres?.map((genre) => {
                         return (
                           <div className={styles.genreItem} key={genre.id}>
                             <p>{genre.name}</p>
@@ -351,7 +351,7 @@ const MovieDetails = () => {
                   <div className={styles.detailContainer}>
                     <p className={styles.detailHeading}>Produced By:</p>
                     <div className={styles.productionCompanyWrapper}>
-                      {movie.production_companies.map((company) => {
+                      {movie?.production_companies?.map((company) => {
                         return (
                           <div className={styles.companyItem}>
                             <p key={company.id}>{company.name}</p>

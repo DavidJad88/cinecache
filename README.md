@@ -1,14 +1,62 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Overview
+CineCache is a responsive React application that allows users to browse movies, search for films, and manage their accounts. The application integrates with The Movie Database (TMDB) API to fetch movie data and uses Firebase for user authentication.
 
-Currently, two official plugins are available:
+Key Features
+Authentication System:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+User signup with email verification
 
-## Expanding the ESLint configuration
+Auth context for managing user state
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Protected routes
 
-input stars https://www.youtube.com/watch?v=BmhU_MoxNqQ&t=387s
+Movie Browsing:
+
+Genre-based movie filtering
+
+Real-time search with overlay results
+
+Responsive movie cards
+
+Form Handling:
+
+Contact form with validation
+
+Error messaging for incomplete/incorrect data
+
+Character limit enforcement
+
+Setup Instructions
+Clone repository: git clone [https://github.com/DavidJad88/cinecache]
+
+Install dependencies: npm install
+
+Create .env file with TMDB API key: VITE_TMDB_API_KEY=your_api_key, and configure your storage solution.
+
+Start development server: npm run dev
+
+Prototype & Documentation
+Figma prototype: [Link to Figma prototype]
+
+Project documentation: [Link to project documentation PDF]
+
+Live Deployment
+Access the live application: [https://cinecache.netlify.app]
+
+Future Enhancements
+User profiles with watchlists
+
+Access to users reviews
+
+Social sharing features
+
+Advanced search filters
+
+Tutorials and accreditations
+Rating system with input stars https://www.youtube.com/watch?v=BmhU_MoxNqQ&t=387s.
+For consistency in data and to debug i used A.I tools.
+Most notably:
+
+All film data belongs and is used with license from [https://www.themoviedb.org/]

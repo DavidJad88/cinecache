@@ -1,4 +1,5 @@
 import styles from "./Profile.module.css";
+import Spinner from "../../components/Spinner/Spinner";
 
 import { useEffect, useState } from "react";
 
@@ -8,23 +9,27 @@ import { getAuthContext } from "../../context/authContext";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { user } = getAuthContext();
 
   useEffect(() => {
     const fetcUserData = async () => {
       if (!user) return;
+      setLoading(true);
       try {
         const userDocRef = doc(database, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
           setUserData(userDoc.data());
-        } else {
-          console.log("User Not Found");
         }
+        setErrorMessage("");
       } catch (error) {
-        console.log(error.message);
+        setErrorMessage("Problem loading user data");
+      } finally {
+        setLoading(false);
       }
     };
     fetcUserData();
@@ -53,6 +58,21 @@ const Profile = () => {
     return string?.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  if (loading) {
+    return (
+      <div className={styles.profile}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <div className={styles.profile}>
+        <p>{errorMessage}</p>
+      </div>
+    );
+  }
   return (
     <div className={styles.profile}>
       <div className={styles.profileInfoWrapper}>

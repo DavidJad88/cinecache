@@ -13,6 +13,7 @@ import { getAuthContext } from "../../context/authContext";
 
 import { countryCodes, countryLanguages } from "../../data/countryCode";
 import RemoveFromLibrary from "../../components/RemoveFromLibrary/RemoveFromLibrary";
+import Spinner from "../../components/Spinner/Spinner";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -28,7 +29,11 @@ const MovieDetails = () => {
   const [hasBeenRemoved, setHasBeenRemoved] = useState(false);
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [movieError, setMovieError] = useState("");
+
+  const [crewLoading, setCrewLoading] = useState(false);
+  const [crewError, setCrewError] = useState("");
+  const [castCardLoaded, setCastCardLoaded] = useState(false);
 
   //states for adding and removing to library
   const [showAddToLibraryModal, setShowAddToLibraryModal] = useState(false);
@@ -52,11 +57,12 @@ const MovieDetails = () => {
         const res = await fetch(
           `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
         );
-        if (!res.ok) throw new Error("Failed to fetch movie details");
+
         const data = await res.json();
         setMovie(data);
-      } catch (err) {
-        setError(err.message);
+        setMovieError("");
+      } catch (error) {
+        setMovieError("Could not find this movie, please try again later");
       } finally {
         setLoading(false);
       }
@@ -65,7 +71,7 @@ const MovieDetails = () => {
     if (id) fetchMovie();
 
     const fetchMovieCrew = async () => {
-      setLoading(true);
+      setCrewLoading(true);
       try {
         const res = await fetch(
           `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
@@ -73,10 +79,11 @@ const MovieDetails = () => {
         if (!res.ok) throw new Error("Failed to fetch movie crew details");
         const data = await res.json();
         setMovieCrew(data);
-      } catch (err) {
-        setError(err.message);
+        setCrewError("");
+      } catch (error) {
+        setCrewError("Failed to find cast, please try again later");
       } finally {
-        setLoading(false);
+        setCrewLoading(false);
       }
     };
     if (id) fetchMovieCrew();
@@ -185,18 +192,75 @@ const MovieDetails = () => {
   //extracting director name
   const directorObj = movieCrew?.crew?.filter(({ job }) => job === "Director");
 
+  if (loading) {
+    return (
+      <div className={styles.movieWrapper}>
+        <Spinner></Spinner>
+      </div>
+    );
+  }
+
+  if (movieError) {
+    return (
+      <div className={styles.movieWrapper}>
+        <p>{movieError}</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.movieWrapper}>
-      {movie && (
-        <>
-          <div className={styles.movieContainer}>
-            <div
-              className={styles.movieImageContainer}
-              style={{
-                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-              }}
-            >
-              <div className={styles.movieImageOverlay}>
+      <>
+        {movie && (
+          <>
+            <div className={styles.movieContainer}>
+              <div
+                className={styles.movieImageContainer}
+                style={{
+                  backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+                }}
+              >
+                <div className={styles.movieImageOverlay}>
+                  <div className={styles.movieTitleWrapper}>
+                    <h2 className={styles.movieTitle}>{movie.title} </h2>
+                    <p className={styles.movieReleaseYear}>({releaseYear})</p>
+                    <p className={styles.movieTagline}>{movie.tagline}</p>
+                  </div>
+                  <div className={styles.movieToolsContainer}>
+                    <div>
+                      {isInUserLibrary ? (
+                        <Button
+                          className={styles.addToLibraryButton}
+                          onClick={handleShowRemoveFromLibraryModal}
+                        >
+                          Remove from library
+                        </Button>
+                      ) : (
+                        <Button
+                          className={styles.removeFromLibraryButton}
+                          onClick={handleShowAddToLibraryModal}
+                        >
+                          Add To library
+                        </Button>
+                      )}
+                    </div>
+                    <div className={styles.userRatingWrapper}>
+                      {usersRating && (
+                        <>
+                          <p>
+                            You've already rated {movie.title} a {usersRating}{" "}
+                            of 10!
+                          </p>
+                          <div className={styles.userRatingContainer}>
+                            <StarRater value={usersRating}></StarRater>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.movieTitleContainer}>
                 <div className={styles.movieTitleWrapper}>
                   <h2 className={styles.movieTitle}>{movie.title} </h2>
                   <p className={styles.movieReleaseYear}>({releaseYear})</p>
@@ -235,160 +299,132 @@ const MovieDetails = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.movieTitleContainer}>
-              <div className={styles.movieTitleWrapper}>
-                <h2 className={styles.movieTitle}>{movie.title} </h2>
-                <p className={styles.movieReleaseYear}>({releaseYear})</p>
-                <p className={styles.movieTagline}>{movie.tagline}</p>
-              </div>
-              <div className={styles.movieToolsContainer}>
-                <div>
-                  {isInUserLibrary ? (
-                    <Button
-                      className={styles.addToLibraryButton}
-                      onClick={handleShowRemoveFromLibraryModal}
-                    >
-                      Remove from library
-                    </Button>
-                  ) : (
-                    <Button
-                      className={styles.removeFromLibraryButton}
-                      onClick={handleShowAddToLibraryModal}
-                    >
-                      Add To library
-                    </Button>
-                  )}
-                </div>
-                <div className={styles.userRatingWrapper}>
-                  {usersRating && (
-                    <>
-                      <p>
-                        You've already rated {movie.title} a {usersRating} of
-                        10!
-                      </p>
-                      <div className={styles.userRatingContainer}>
-                        <StarRater value={usersRating}></StarRater>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
 
-            <div className={styles.summaryContainer}>
-              <p>Overview:</p>
-              <p className={styles.movieSummary}>"{movie.overview}"</p>
-            </div>
-            <div className={styles.movieOverviewWrapper}>
-              <div className={styles.moviePosterContainer}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={`${movie.title} poster image`}
-                />
+              <div className={styles.summaryContainer}>
+                <p>Overview:</p>
+                <p className={styles.movieSummary}>"{movie.overview}"</p>
               </div>
-              <div className={styles.movieDetailsContainer}>
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Country of origin</p>{" "}
-                  <p>{countryName}</p>
+              <div className={styles.movieOverviewWrapper}>
+                <div className={styles.moviePosterContainer}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={`${movie.title} poster image`}
+                  />
                 </div>
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Directed by</p>{" "}
-                  {directorObj?.map((director) => {
-                    return <p key={director.id}>{director.name}</p>;
-                  })}
-                </div>
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Runtime</p>{" "}
-                  <p>{movie.runtime} Minutes</p>
-                </div>
-
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Genre</p>
-                  <div className={styles.genreWrapper}>
-                    {movie.genres.map((genre) => {
-                      return (
-                        <div className={styles.genreItem} key={genre.id}>
-                          <p>{genre.name}</p>
-                        </div>
-                      );
+                <div className={styles.movieDetailsContainer}>
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Country of origin</p>{" "}
+                    <p>{countryName}</p>
+                  </div>
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Directed by</p>{" "}
+                    {directorObj?.map((director) => {
+                      return <p key={director.id}>{director.name}</p>;
                     })}
                   </div>
-                </div>
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Language</p>{" "}
-                  <p>{languageName}</p>
-                </div>
-
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Release Date</p>{" "}
-                  <p>{movie.release_date}</p>
-                </div>
-                <div className={styles.detailContainer}>
-                  <p className={styles.detailHeading}>Produced By:</p>
-                  <div className={styles.productionCompanyWrapper}>
-                    {movie.production_companies.map((company) => {
-                      return (
-                        <div className={styles.companyItem}>
-                          <p key={company.id}>{company.name}</p>
-                        </div>
-                      );
-                    })}
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Runtime</p>{" "}
+                    <p>{movie.runtime} Minutes</p>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.movieCastWrapper}>
-              <h2>Top Billed Cast</h2>
-              <div className={styles.castScroller}>
-                {movieCrew?.cast?.map((castMember) => {
-                  return (
-                    <div key={castMember.id} className={styles.castCard}>
-                      {castMember?.profile_path ? (
-                        <img
-                          src={`https://image.tmdb.org/t/p/original${castMember.profile_path}`}
-                          alt={castMember.name}
-                        />
-                      ) : (
-                        <img
-                          src="/assets/icons/clapper.svg"
-                          alt={castMember.name}
-                        ></img>
-                      )}
 
-                      <p className={styles.actorName}>{castMember.name}</p>
-                      <p className={styles.characterName}>
-                        {castMember.character}
-                      </p>
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Genre</p>
+                    <div className={styles.genreWrapper}>
+                      {movie.genres.map((genre) => {
+                        return (
+                          <div className={styles.genreItem} key={genre.id}>
+                            <p>{genre.name}</p>
+                          </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
+                  </div>
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Language</p>{" "}
+                    <p>{languageName}</p>
+                  </div>
+
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Release Date</p>{" "}
+                    <p>{movie.release_date}</p>
+                  </div>
+                  <div className={styles.detailContainer}>
+                    <p className={styles.detailHeading}>Produced By:</p>
+                    <div className={styles.productionCompanyWrapper}>
+                      {movie.production_companies.map((company) => {
+                        return (
+                          <div className={styles.companyItem}>
+                            <p key={company.id}>{company.name}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.movieCastWrapper}>
+                <h2>Top Billed Cast</h2>
+                <div className={styles.castScroller}>
+                  {crewError ? (
+                    <p>{crewError}</p>
+                  ) : (
+                    movieCrew?.cast?.map((castMember) => {
+                      return (
+                        <>
+                          {!castCardLoaded && <Spinner></Spinner>}
+
+                          <div key={castMember.id} className={styles.castCard}>
+                            {castMember?.profile_path ? (
+                              <img
+                                src={`https://image.tmdb.org/t/p/original${castMember.profile_path}`}
+                                alt={castMember.name}
+                                onLoad={() => setCastCardLoaded(true)}
+                              />
+                            ) : (
+                              <img
+                                src="/assets/icons/clapper.svg"
+                                alt={castMember.name}
+                              ></img>
+                            )}
+
+                            <p className={styles.actorName}>
+                              {castMember.name}
+                            </p>
+                            <p className={styles.characterName}>
+                              {castMember.character}
+                            </p>
+                          </div>
+                        </>
+                      );
+                    })
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          {showAddToLibraryModal && (
-            <Modal containerClassName={styles.addOrRemoveModal}>
-              <AddToLibrary
-                movie={movie}
-                crew={movieCrew}
-                setShowAddToLibraryModal={setShowAddToLibraryModal}
-                setHasBeenAdded={setHasBeenAdded}
-                hasBeenAdded={hasBeenAdded}
-              />
-            </Modal>
-          )}
-          {showRemoveFromLibraryModal && (
-            <Modal containerClassName={styles.addOrRemoveModal}>
-              <RemoveFromLibrary
-                movie={movie}
-                setShowRemoveFromLibraryModal={setShowRemoveFromLibraryModal}
-                setHasBeenRemoved={setHasBeenRemoved}
-                hasBeenRemoved={hasBeenRemoved}
-              />
-            </Modal>
-          )}
-        </>
-      )}
+            {showAddToLibraryModal && (
+              <Modal containerClassName={styles.addOrRemoveModal}>
+                <AddToLibrary
+                  movie={movie}
+                  crew={movieCrew}
+                  setShowAddToLibraryModal={setShowAddToLibraryModal}
+                  setHasBeenAdded={setHasBeenAdded}
+                  hasBeenAdded={hasBeenAdded}
+                />
+              </Modal>
+            )}
+            {showRemoveFromLibraryModal && (
+              <Modal containerClassName={styles.addOrRemoveModal}>
+                <RemoveFromLibrary
+                  movie={movie}
+                  setShowRemoveFromLibraryModal={setShowRemoveFromLibraryModal}
+                  setHasBeenRemoved={setHasBeenRemoved}
+                  hasBeenRemoved={hasBeenRemoved}
+                />
+              </Modal>
+            )}
+          </>
+        )}
+      </>
     </div>
   );
 };

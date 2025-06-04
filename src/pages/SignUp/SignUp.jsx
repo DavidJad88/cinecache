@@ -22,8 +22,6 @@ const SignUp = () => {
     previewUrl: "",
   });
 
-  const [error, setError] = useState("");
-
   const fileInputRef = useRef(null);
 
   //validation function from custom hook
@@ -307,6 +305,7 @@ const SignUp = () => {
           )}
         </fieldset>
         <Button className={styles.createAccountButton}>Create Account</Button>
+        {signUpError && <p>{signUpError}</p>}
       </form>
     </div>
   );

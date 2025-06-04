@@ -1,0 +1,46 @@
+.spinnerContainer {
+  position: absolute; /* Ensures it's confined to the parent container */
+  top: 0;
+  left: 0;
+  width: 100%; /* Matches parent dimensions */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent for focus effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* Higher than the widget's elements */
+}
+/*.spinnerCircle {
+ width: 50px;
+    height: 50px;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    position: relative;
+    animation: spin 1s linear infinite;
+    padding: var(--space-small);
+    color: var(--primary-color-light);
+} */
+.spinnerImage {
+  width: 50px;
+  height: 50px;
+  animation: jump 1s linear infinite;
+}
+/* @keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

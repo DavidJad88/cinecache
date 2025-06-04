@@ -2,6 +2,7 @@ import styles from "./Contact.module.css";
 
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal/Modal";
+import Spinner from "../../components/Spinner/Spinner";
 
 import { getAuthContext } from "../../context/authContext";
 import { database } from "../../../firebaseConfig";
@@ -19,6 +20,8 @@ import useContactValidation from "../../hooks/useContactValidation";
 const Contact = () => {
   const [currentUserData, setCurrentUserData] = useState({});
   const [showContactModal, setShowContactModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("false");
 
   const [contactFormData, setContactFormData] = useState({
     firstName: "",
@@ -83,16 +86,16 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateContactForm(contactFormData)) {
-      console.log("Form Is not Valid");
       return;
     }
+    setIsLoading(true);
+
     try {
       const docRef = await addDoc(collection(database, "contactMessages"), {
         ...contactFormData,
         submittedAt: serverTimestamp(),
       });
       setShowContactModal(true);
-      console.log("Document added with the id", docRef.id);
       setContactFormData({
         firstName: "",
         lastName: "",
@@ -100,8 +103,14 @@ const Contact = () => {
         subject: "",
         message: "",
       });
+      setErrorMessage("");
     } catch (error) {
-      console.log(error.message);
+      setErrorMessage(
+        "Problem uploading contact request, please try again later"
+      );
+      setShowContactModal(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -199,17 +208,24 @@ const Contact = () => {
           </div>
         </form>
       </div>
+      {isLoading && <Spinner></Spinner>}
       {showContactModal && (
         <Modal>
           <div className={styles.contactModalContent}>
-            <h2>Your message has been delivered</h2>
-            <p>
-              Thank you for reaching out! We’ve received your message and will
-              get back to you as soon as possible.
-            </p>
-            <p>
-              We appreciate your patience and look forward to assisting you.
-            </p>
+            {!errorMessage ? (
+              <>
+                <h2>Your message has been delivered</h2>
+                <p>
+                  Thank you for reaching out! We’ve received your message and
+                  will get back to you as soon as possible.
+                </p>
+                <p>
+                  We appreciate your patience and look forward to assisting you.
+                </p>
+              </>
+            ) : (
+              <p>{errorMessage}</p>
+            )}
             <Button
               className={styles.closeModalButton}
               onClick={() => setShowContactModal(false)}

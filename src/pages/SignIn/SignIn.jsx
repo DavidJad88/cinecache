@@ -9,6 +9,7 @@ import { auth } from "../../../firebaseConfig";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal/Modal";
+import Spinner from "../../components/Spinner/Spinner";
 
 const SignIn = () => {
   const [signInFormData, setSignInFormData] = useState({
@@ -19,6 +20,9 @@ const SignIn = () => {
   const [resetEmail, setResetEmail] = useState("");
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [resetMessage, setResetMessage] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { validateSignIn, signInErrors } = useSignInValidation();
 
@@ -36,7 +40,7 @@ const SignIn = () => {
       console.log("Form is not valid");
       return;
     }
-
+    setLoading(true);
     try {
       const userCredentials = await signInWithEmailAndPassword(
         auth,
@@ -50,8 +54,11 @@ const SignIn = () => {
         email: "",
         password: "",
       });
+      setErrorMessage("");
     } catch (error) {
-      console.log(error.message);
+      setErrorMessage("Problem signing in, please try again later");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,6 +85,7 @@ const SignIn = () => {
       console.log(error.message);
     }
   };
+
   return (
     <div className={styles.formWrapper}>
       <h2>Sign-in Form</h2>
@@ -113,6 +121,7 @@ const SignIn = () => {
           )}
         </fieldset>
         {/* ------------------ */}
+
         <p>
           Don´t have an account? Create one <Link to={"/sign-up"}>here</Link>
         </p>
@@ -127,8 +136,14 @@ const SignIn = () => {
             here
           </Button>
         </p>
-        <Button className={styles.signInButton}>Sign In</Button>
+        {loading ? (
+          <Spinner></Spinner>
+        ) : (
+          <Button className={styles.signInButton}>Sign In</Button>
+        )}
+        {errorMessage && <p>{errorMessage}</p>}
       </form>
+
       {/* --------------------- */}
       {showForgotPasswordModal && (
         <Modal>

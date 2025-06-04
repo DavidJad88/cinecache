@@ -186,6 +186,9 @@
   color: var(--text-light);
   gap: var(--space-medium);
 }
+.movieCastWrapper h2 {
+  font-size: var(--mediumplus-font-size);
+}
 
 .castScroller {
   height: 100%;

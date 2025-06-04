@@ -1,6 +1,5 @@
 .movieListWrapper {
   width: 100%;
-  max-width: 1200px;
   min-height: 100vh;
   max-height: auto;
   display: flex;
@@ -19,6 +18,7 @@
 
 .genreWrapper {
   width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
 

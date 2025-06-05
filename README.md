@@ -1,62 +1,78 @@
 # React + Vite
 
-Project Overview
-CineCache is a responsive React application that allows users to browse movies, search for films, and manage their accounts. The application integrates with The Movie Database (TMDB) API to fetch movie data and uses Firebase for user authentication.
+# CineCache
 
-Key Features
-Authentication System:
+**Live Demo:** [https://cinecache.netlify.app/](https://cinecache.netlify.app/)  
+**GitHub Repo:** [https://github.com/DavidJad88/cinecache](https://github.com/DavidJad88/cinecache)
 
-User signup with email verification
+---
 
-Auth context for managing user state
+## Project Overview
 
-Protected routes
+CineCache is a responsive React application for movie lovers. Users can browse, search, rate, and review films, as well as manage their personal movie library. The app integrates with The Movie Database (TMDB) API for up-to-date film data and uses Firebase for authentication and persistent user data.
 
-Movie Browsing:
+---
 
-Genre-based movie filtering
+## Key Features
 
-Real-time search with overlay results
+- **Authentication System**
 
-Responsive movie cards
+  - User signup with email verification
+  - Secure login and logout
+  - Protected routes for authenticated users
+  - Auth context for global user state
 
-Form Handling:
+- **Movie Browsing**
 
-Contact form with validation
+  - Genre-based movie filtering
+  - Real-time search with overlay results (search results overlay main content)
+  - Responsive movie cards with details, ratings, and reviews
 
-Error messaging for incomplete/incorrect data
+- **Personal Library**
 
-Character limit enforcement
+  - Add/remove movies to/from your library
+  - Rate and review movies
+  - Persistent storage with Firestore
 
-Setup Instructions
-Clone repository: git clone [https://github.com/DavidJad88/cinecache]
+- **Form Handling**
 
-Install dependencies: npm install
+  - All forms (signup, signin, contact, reviews) are validated
+  - Clear error and success feedback for users
 
-Create .env file with TMDB API key: VITE_TMDB_API_KEY=your_api_key, and configure your storage solution.
+- **API Integration**
 
-Start development server: npm run dev
+  - TMDB API for movie data
+  - Firebase Firestore for user data
 
-Prototype & Documentation
-Figma prototype: [Link to Figma prototype]
+- **Responsive Design**
+  - Fully responsive layout
+  - Component-based architecture
 
-Project documentation: [Link to project documentation PDF]
+---
 
-Live Deployment
-Access the live application: [https://cinecache.netlify.app]
+## Technical Stack
 
-Future Enhancements
-User profiles with watchlists
+- **Frontend:** React (with Vite), React Router, CSS Modules
+- **Database:** Firebase Firestore
+- **Authentication:** Firebase Auth
+- **API:** The Movie Database (TMDB)
+- **Deployment:** Netlify
 
-Access to users reviews
+---
 
-Social sharing features
+## User Interface
 
-Advanced search filters
+- Structured, accessible layout for all pages
+- Responsive design for all devices
+- Clear feedback for all form interactions (errors, validation, success)
+- Overlay search results that supercede main content for a focused search experience
 
-Tutorials and accreditations
-Rating system with input stars https://www.youtube.com/watch?v=BmhU_MoxNqQ&t=387s.
-For consistency in data and to debug i used A.I tools.
-Most notably:
+---
 
-All film data belongs and is used with license from [https://www.themoviedb.org/]
+## Credits & Licensing
+
+- All film data is provided by and used with license from [The Movie Database (TMDB)](https://www.themoviedb.org/)
+- Rating system inspired by [YouTube tutorial](https://www.youtube.com/watch?v=BmhU_MoxNqQ&t=387s)
+- For consistency in data and debugging, A.I. tools were used as assistants
+
+---
